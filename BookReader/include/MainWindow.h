@@ -13,11 +13,13 @@ public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_aboutProgramButton_clicked();
+
 private:
     Ui::MainWindow* ui;
-    const int WINDOW_WIDTH = 1366;
-    const int WINDOW_HEIGHT = 768;
-    const QIcon* windowIcon = new QIcon(":/img/book_icon.png");
+    const int WINDOW_WIDTH = 1360;
+    const int WINDOW_HEIGHT = 800;
 };
 
 #endif // MAINWINDOW_H

@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>img/book_icon.png</file>
+        <file>img/program_icon.png</file>
+        <file>img/book_image.jpg</file>
     </qresource>
 </RCC>
