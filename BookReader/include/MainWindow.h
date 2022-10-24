@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef MAIN_WINDOW_H
+#define MAIN_WINDOW_H
 
 #include <QMainWindow>
 
@@ -17,9 +17,13 @@ private slots:
     void on_aboutProgramButton_clicked();
 
 private:
+    void ConfigureMainWindow();
+    void ConfigureTabWidget();
+    void ConfigureAboutProgramLabel();
+
     Ui::MainWindow* ui;
     const int WINDOW_WIDTH = 1360;
     const int WINDOW_HEIGHT = 800;
 };
 
-#endif // MAINWINDOW_H
+#endif // MAIN_WINDOW_H

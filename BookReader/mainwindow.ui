@@ -83,33 +83,20 @@
      <attribute name="title">
       <string>Tab 2</string>
      </attribute>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="aboutProgramLabel">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>0</x>
         <y>0</y>
-        <width>931</width>
-        <height>731</height>
+        <width>930</width>
+        <height>745</height>
        </rect>
       </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
       <property name="text">
-       <string>Эта программа предназначена для чтения книг с расширением .fb2.  Для того, чтобы начать читать книгу, Вам необходимо:
-1) нажать кнопку &quot;Выбрать файл&quot;;
-2) в появившемся диалоговом окне выбрать интересующую Вас книгу;
-3) нажать кнопку &quot;открыть&quot;.
- В правой части экрана появится текст книги. Для перехода на следующую страницу необходимо нажать кнопку &quot;&gt;&quot;, для перехода на предыдущую — кнопку &quot;&lt;&quot;. </string>
+       <string>TextLabel</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-      </property>
-      <property name="wordWrap">
-       <bool>true</bool>
       </property>
      </widget>
     </widget>

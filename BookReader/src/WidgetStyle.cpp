@@ -1,11 +1,25 @@
 #include "../include/WidgetStyle.h"
 
-QString WidgetStyle::GetTabStyle()  // hides tab buttons on the QTabBar widget
+QString WidgetStyle::GetTabStyle()  // return styles wich hide tab buttons on the QTabBar widget
 {
-    return "QTabBar::tab "
-           "{ width: 0; "
-           "height: 0; "
-           "margin: 0; "
-           "padding: 0; "
-           "border: none; }";
+    return "QTabBar::tab {"
+                "width: 0;"
+                "height: 0;"
+            "}"
+
+            "QTabWidget::pane {"
+               "background: #FAEBD7;"
+               "border: 1px solid gray;"
+            "}";
+}
+
+QString WidgetStyle::GetAboutPogramLabelStyle()
+{
+    return "QLabel {"
+                "qproperty-wordWrap: true;"
+                "font-size: 20px;"
+                "font-family: \"Times New Roman\";"
+               // "border: 1px solid gray;"
+               // "background-color: #FAEBD7;"
+            "}";
 }
