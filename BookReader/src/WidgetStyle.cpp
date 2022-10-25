@@ -19,7 +19,5 @@ QString WidgetStyle::GetAboutPogramLabelStyle()
                 "qproperty-wordWrap: true;"
                 "font-size: 20px;"
                 "font-family: \"Times New Roman\";"
-               // "border: 1px solid gray;"
-               // "background-color: #FAEBD7;"
             "}";
 }
