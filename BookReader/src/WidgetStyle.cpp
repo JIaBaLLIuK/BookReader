@@ -1,6 +1,6 @@
 #include "../include/WidgetStyle.h"
 
-QString WidgetStyle::GetTabStyle()  // return styles wich hide tab buttons on the QTabBar widget
+QString WidgetStyle::GetTabStyle()
 {
     return "QTabBar::tab {"
                 "width: 0;"
