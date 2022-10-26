@@ -1,3 +1,6 @@
+#include <QFileDialog>
+#include <QMessageBox>
+
 #include "../include/MainWindow.h"
 #include "../include/WidgetStyle.h"
 #include "ui_mainwindow.h"
@@ -7,7 +10,11 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     ConfigureMainWindow();
     ConfigureTabWidget();
+    ConfigureStartLabel();
     ConfigureAboutProgramLabel();
+    ConfigurePageNumberLabels();
+
+
 }
 
 MainWindow::~MainWindow()
@@ -17,15 +24,25 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_aboutProgramButton_clicked()
 {
-    if (ui->programTab->currentIndex() == 0)
+     ui->programTab->setCurrentIndex(2);
+}
+
+void MainWindow::on_toStartMenuButton_clicked()
+{
+    ui->programTab->setCurrentIndex(0);
+}
+
+void MainWindow::on_chooseFileButton_clicked()
+{
+    QString path = QFileDialog::getOpenFileName(this, "Выберите файл", "C:", "Book file (*.fb2)");
+    if (path.isEmpty())
     {
-        ui->aboutProgramButton->setText("Назад");
-        ui->programTab->setCurrentIndex(1);
+        QMessageBox::warning(this, "Ошибка!", "Вы не выбрали файл!");
     }
     else
     {
-        ui->aboutProgramButton->setText("О программе");
-        ui->programTab->setCurrentIndex(0);
+        book.SetPathToBookFile(path);
+        book.GetBookText();
     }
 }
 
@@ -46,10 +63,16 @@ void MainWindow::ConfigureTabWidget()
     ui->programTab->setCurrentIndex(0);
 }
 
+void MainWindow::ConfigureStartLabel()
+{
+    ui->startLabel->setStyleSheet(WidgetStyle::GetStartLabelStyle());
+    ui->startLabel->setText("Book   Reader");
+}
+
 void MainWindow::ConfigureAboutProgramLabel()
 {
     ui->aboutProgramLabel->setStyleSheet(WidgetStyle::GetAboutPogramLabelStyle());
-    ui->aboutProgramLabel->setText("Эта программа предназначена для чтения электронных книг, имеющих расширение .fb2. "
+    ui->aboutProgramLabel->setText("    Эта программа предназначена для чтения электронных книг, имеющих расширение .fb2. "
                                    "Для того, чтобы начать читать, необходимо:\n"
                                    "1) нажать на кнопку \"Выбрать файл\" в левой части окна;\n"
                                    "2) в открывшемся диалоговом окне выбрать файл, имеющий расширений .fb2;\n"
@@ -58,3 +81,9 @@ void MainWindow::ConfigureAboutProgramLabel()
                                    "для перехода на предыдущую страницу — нажать на кнопку \"<\".");
 }
 
+void MainWindow::ConfigurePageNumberLabels()
+{
+    ui->currentPageNumberLabel->setStyleSheet(WidgetStyle::GetPageNumberLabelsStyle());
+    ui->slashLabel->setStyleSheet(WidgetStyle::GetPageNumberLabelsStyle());
+    ui->totalPagesNumberLabel->setStyleSheet(WidgetStyle::GetPageNumberLabelsStyle());
+}

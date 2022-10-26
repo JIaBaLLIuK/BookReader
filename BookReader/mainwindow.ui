@@ -36,7 +36,7 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="chooseBookButton">
+   <widget class="QPushButton" name="toStartMenuButton">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -46,14 +46,14 @@
      </rect>
     </property>
     <property name="text">
-     <string>Выбрать файл</string>
+     <string>На главную</string>
     </property>
    </widget>
    <widget class="QPushButton" name="aboutProgramButton">
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>310</y>
+      <y>350</y>
       <width>140</width>
       <height>30</height>
      </rect>
@@ -66,30 +66,147 @@
     <property name="geometry">
      <rect>
       <x>400</x>
-      <y>10</y>
-      <width>951</width>
-      <height>771</height>
+      <y>0</y>
+      <width>950</width>
+      <height>790</height>
      </rect>
     </property>
     <property name="currentIndex">
      <number>1</number>
     </property>
+    <widget class="QWidget" name="startTab">
+     <attribute name="title">
+      <string>start</string>
+     </attribute>
+     <widget class="QLabel" name="startLabel">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>940</width>
+        <height>281</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </widget>
     <widget class="QWidget" name="bookTab">
      <attribute name="title">
-      <string>Tab 1</string>
+      <string>book</string>
      </attribute>
+     <widget class="QLabel" name="bookLabel">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>940</width>
+        <height>700</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="previousPageButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>740</y>
+        <width>40</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="nextPageButton">
+      <property name="geometry">
+       <rect>
+        <x>900</x>
+        <y>740</y>
+        <width>40</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="slashLabel">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>740</y>
+        <width>10</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>/</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="totalPagesNumberLabel">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>740</y>
+        <width>50</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="currentPageNumberLabel">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>740</y>
+        <width>50</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="aboutTab">
      <attribute name="title">
-      <string>Tab 2</string>
+      <string>about</string>
      </attribute>
      <widget class="QLabel" name="aboutProgramLabel">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>930</width>
-        <height>745</height>
+        <width>940</width>
+        <height>741</height>
        </rect>
       </property>
       <property name="text">
@@ -100,6 +217,19 @@
       </property>
      </widget>
     </widget>
+   </widget>
+   <widget class="QPushButton" name="chooseFileButton">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>310</y>
+      <width>140</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Выбрать файл</string>
+    </property>
    </widget>
   </widget>
  </widget>

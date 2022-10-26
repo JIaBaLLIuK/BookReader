@@ -24,12 +24,21 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QLabel *imageLabel;
-    QPushButton *chooseBookButton;
+    QPushButton *toStartMenuButton;
     QPushButton *aboutProgramButton;
     QTabWidget *programTab;
+    QWidget *startTab;
+    QLabel *startLabel;
     QWidget *bookTab;
+    QLabel *bookLabel;
+    QPushButton *previousPageButton;
+    QPushButton *nextPageButton;
+    QLabel *slashLabel;
+    QLabel *totalPagesNumberLabel;
+    QLabel *currentPageNumberLabel;
     QWidget *aboutTab;
     QLabel *aboutProgramLabel;
+    QPushButton *chooseFileButton;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -47,25 +56,62 @@ public:
         sizePolicy.setHeightForWidth(imageLabel->sizePolicy().hasHeightForWidth());
         imageLabel->setSizePolicy(sizePolicy);
         imageLabel->setScaledContents(false);
-        chooseBookButton = new QPushButton(centralwidget);
-        chooseBookButton->setObjectName(QString::fromUtf8("chooseBookButton"));
-        chooseBookButton->setGeometry(QRect(120, 270, 140, 30));
+        toStartMenuButton = new QPushButton(centralwidget);
+        toStartMenuButton->setObjectName(QString::fromUtf8("toStartMenuButton"));
+        toStartMenuButton->setGeometry(QRect(120, 270, 140, 30));
         aboutProgramButton = new QPushButton(centralwidget);
         aboutProgramButton->setObjectName(QString::fromUtf8("aboutProgramButton"));
-        aboutProgramButton->setGeometry(QRect(120, 310, 140, 30));
+        aboutProgramButton->setGeometry(QRect(120, 350, 140, 30));
         programTab = new QTabWidget(centralwidget);
         programTab->setObjectName(QString::fromUtf8("programTab"));
-        programTab->setGeometry(QRect(400, 10, 951, 771));
+        programTab->setGeometry(QRect(400, 0, 950, 790));
+        startTab = new QWidget();
+        startTab->setObjectName(QString::fromUtf8("startTab"));
+        startLabel = new QLabel(startTab);
+        startLabel->setObjectName(QString::fromUtf8("startLabel"));
+        startLabel->setGeometry(QRect(0, 0, 940, 281));
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(startLabel->sizePolicy().hasHeightForWidth());
+        startLabel->setSizePolicy(sizePolicy1);
+        startLabel->setAlignment(Qt::AlignCenter);
+        programTab->addTab(startTab, QString());
         bookTab = new QWidget();
         bookTab->setObjectName(QString::fromUtf8("bookTab"));
+        bookLabel = new QLabel(bookTab);
+        bookLabel->setObjectName(QString::fromUtf8("bookLabel"));
+        bookLabel->setGeometry(QRect(0, 0, 940, 700));
+        bookLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        previousPageButton = new QPushButton(bookTab);
+        previousPageButton->setObjectName(QString::fromUtf8("previousPageButton"));
+        previousPageButton->setGeometry(QRect(10, 740, 40, 25));
+        nextPageButton = new QPushButton(bookTab);
+        nextPageButton->setObjectName(QString::fromUtf8("nextPageButton"));
+        nextPageButton->setGeometry(QRect(900, 740, 40, 25));
+        slashLabel = new QLabel(bookTab);
+        slashLabel->setObjectName(QString::fromUtf8("slashLabel"));
+        slashLabel->setGeometry(QRect(420, 740, 10, 25));
+        slashLabel->setAlignment(Qt::AlignCenter);
+        totalPagesNumberLabel = new QLabel(bookTab);
+        totalPagesNumberLabel->setObjectName(QString::fromUtf8("totalPagesNumberLabel"));
+        totalPagesNumberLabel->setGeometry(QRect(430, 740, 50, 25));
+        totalPagesNumberLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
+        currentPageNumberLabel = new QLabel(bookTab);
+        currentPageNumberLabel->setObjectName(QString::fromUtf8("currentPageNumberLabel"));
+        currentPageNumberLabel->setGeometry(QRect(370, 740, 50, 25));
+        currentPageNumberLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         programTab->addTab(bookTab, QString());
         aboutTab = new QWidget();
         aboutTab->setObjectName(QString::fromUtf8("aboutTab"));
         aboutProgramLabel = new QLabel(aboutTab);
         aboutProgramLabel->setObjectName(QString::fromUtf8("aboutProgramLabel"));
-        aboutProgramLabel->setGeometry(QRect(0, 0, 930, 745));
+        aboutProgramLabel->setGeometry(QRect(0, 0, 940, 741));
         aboutProgramLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         programTab->addTab(aboutTab, QString());
+        chooseFileButton = new QPushButton(centralwidget);
+        chooseFileButton->setObjectName(QString::fromUtf8("chooseFileButton"));
+        chooseFileButton->setGeometry(QRect(120, 310, 140, 30));
         MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(MainWindow);
@@ -80,11 +126,20 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         imageLabel->setText(QString());
-        chooseBookButton->setText(QCoreApplication::translate("MainWindow", "\320\222\321\213\320\261\321\200\320\260\321\202\321\214 \321\204\320\260\320\271\320\273", nullptr));
+        toStartMenuButton->setText(QCoreApplication::translate("MainWindow", "\320\235\320\260 \320\263\320\273\320\260\320\262\320\275\321\203\321\216", nullptr));
         aboutProgramButton->setText(QCoreApplication::translate("MainWindow", "\320\236 \320\277\321\200\320\276\320\263\321\200\320\260\320\274\320\274\320\265", nullptr));
-        programTab->setTabText(programTab->indexOf(bookTab), QCoreApplication::translate("MainWindow", "Tab 1", nullptr));
+        startLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        programTab->setTabText(programTab->indexOf(startTab), QCoreApplication::translate("MainWindow", "start", nullptr));
+        bookLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        previousPageButton->setText(QCoreApplication::translate("MainWindow", "<", nullptr));
+        nextPageButton->setText(QCoreApplication::translate("MainWindow", ">", nullptr));
+        slashLabel->setText(QCoreApplication::translate("MainWindow", "/", nullptr));
+        totalPagesNumberLabel->setText(QString());
+        currentPageNumberLabel->setText(QString());
+        programTab->setTabText(programTab->indexOf(bookTab), QCoreApplication::translate("MainWindow", "book", nullptr));
         aboutProgramLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
-        programTab->setTabText(programTab->indexOf(aboutTab), QCoreApplication::translate("MainWindow", "Tab 2", nullptr));
+        programTab->setTabText(programTab->indexOf(aboutTab), QCoreApplication::translate("MainWindow", "about", nullptr));
+        chooseFileButton->setText(QCoreApplication::translate("MainWindow", "\320\222\321\213\320\261\321\200\320\260\321\202\321\214 \321\204\320\260\320\271\320\273", nullptr));
     } // retranslateUi
 
 };
