@@ -19,6 +19,7 @@ QString WidgetStyle::GetAboutPogramLabelStyle()
                 "qproperty-wordWrap: true;"
                 "font-size: 20px;"
                 "font-family: \"Times New Roman\";"
+<<<<<<< HEAD
            "}";
 }
 
@@ -48,4 +49,7 @@ QString WidgetStyle::GetBookLabelStyle()
                 "font-size: 20px;"
                 "font-family: \"Times New Roman\";"
            "}";
+=======
+            "}";
+>>>>>>> 71f1b8d385306c6712a94b2d1a57c76083c33321
 }
