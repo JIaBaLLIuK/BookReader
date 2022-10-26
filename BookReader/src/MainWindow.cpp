@@ -40,9 +40,14 @@ void MainWindow::on_chooseFileButton_clicked()
         QMessageBox::warning(this, "Ошибка!", "Вы не выбрали файл!");
     }
     else
-    {
-        book.SetPathToBookFile(path);
-        book.GetBookText();
+    {   // TODO: сделать нормальное отображения текста, навигацию по страницу
+        book = new Book(path);
+        book->ParseBookFile();
+        ui->bookLabel->setStyleSheet(WidgetStyle::GetBookLabelStyle());
+        QString lineHeightHTML = "<p style=\"line-height:%1%\">%2<p>";
+        QString targetText = lineHeightHTML.arg(120).arg(book->GetBookText());
+        ui->programTab->setCurrentIndex(1);
+        ui->bookLabel->setText(targetText);
     }
 }
 
@@ -76,7 +81,7 @@ void MainWindow::ConfigureAboutProgramLabel()
                                    "Для того, чтобы начать читать, необходимо:\n"
                                    "1) нажать на кнопку \"Выбрать файл\" в левой части окна;\n"
                                    "2) в открывшемся диалоговом окне выбрать файл, имеющий расширений .fb2;\n"
-                                   "3) после выбора файла нажать кнопку открыть.\n"
+                                   "3) выбрав нужный файл, нажать кнопку \"Открыть\".\n"
                                    "После открытия файла для перехода на следующую страницу необходимо нажать на кнопку \">\" в нижней части экрана, "
                                    "для перехода на предыдущую страницу — нажать на кнопку \"<\".");
 }

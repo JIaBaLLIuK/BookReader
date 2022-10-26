@@ -81,7 +81,7 @@ public:
         bookTab->setObjectName(QString::fromUtf8("bookTab"));
         bookLabel = new QLabel(bookTab);
         bookLabel->setObjectName(QString::fromUtf8("bookLabel"));
-        bookLabel->setGeometry(QRect(0, 0, 940, 700));
+        bookLabel->setGeometry(QRect(0, 0, 940, 720));
         bookLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         previousPageButton = new QPushButton(bookTab);
         previousPageButton->setObjectName(QString::fromUtf8("previousPageButton"));

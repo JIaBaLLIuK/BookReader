@@ -333,6 +333,7 @@ Makefile: ../BookReader/BookReader.pro E:/Qt/6.3.1/mingw_64/mkspecs/win32-g++/qm
 		../BookReader/BookReader.pro \
 		E:/Qt/6.3.1/mingw_64/lib/Qt6Widgets.prl \
 		E:/Qt/6.3.1/mingw_64/lib/Qt6Gui.prl \
+		E:/Qt/6.3.1/mingw_64/lib/Qt6Xml.prl \
 		E:/Qt/6.3.1/mingw_64/lib/Qt6Core.prl \
 		E:/Qt/6.3.1/mingw_64/lib/Qt6EntryPoint.prl \
 		E:/Qt/6.3.1/mingw_64/mkspecs/features/build_pass.prf \
@@ -601,6 +602,7 @@ E:/Qt/6.3.1/mingw_64/mkspecs/features/lex.prf:
 ../BookReader/BookReader.pro:
 E:/Qt/6.3.1/mingw_64/lib/Qt6Widgets.prl:
 E:/Qt/6.3.1/mingw_64/lib/Qt6Gui.prl:
+E:/Qt/6.3.1/mingw_64/lib/Qt6Xml.prl:
 E:/Qt/6.3.1/mingw_64/lib/Qt6Core.prl:
 E:/Qt/6.3.1/mingw_64/lib/Qt6EntryPoint.prl:
 E:/Qt/6.3.1/mingw_64/mkspecs/features/build_pass.prf:

@@ -30,7 +30,7 @@ private:
     Ui::MainWindow* ui;
     const int WINDOW_WIDTH = 1360;
     const int WINDOW_HEIGHT = 800;
-    Book book;
+    Book* book;
 };
 
 #endif // MAIN_WINDOW_H

@@ -2,14 +2,17 @@
 #define BOOK_H
 
 #include <QString>
+#include <QXmlStreamReader>
 
 class Book
 {
 public:
-    Book() = default;
+    Book(QString);
     ~Book() = default;
     void SetPathToBookFile(QString);
-    QString GetBookText();
+    void ParseBookFile();
+    void SetBookText(QXmlStreamReader&);
+    QString GetBookText() const;
 
 private:
     QString pathToBookFile;
