@@ -78,7 +78,7 @@
      <attribute name="title">
       <string>start</string>
      </attribute>
-     <widget class="QLabel" name="startLabel">
+     <widget class="QLabel" name="mainWindowLabel">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -111,7 +111,7 @@
         <x>0</x>
         <y>0</y>
         <width>940</width>
-        <height>720</height>
+        <height>717</height>
        </rect>
       </property>
       <property name="text">

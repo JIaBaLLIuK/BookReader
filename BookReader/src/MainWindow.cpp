@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     ConfigureMainWindow();
     ConfigureTabWidget();
-    ConfigureStartLabel();
+    ConfigureMainWindowLabel();
     ConfigureAboutProgramLabel();
     ConfigurePageNumberLabels();
 
@@ -40,14 +40,13 @@ void MainWindow::on_chooseFileButton_clicked()
         QMessageBox::warning(this, "Ошибка!", "Вы не выбрали файл!");
     }
     else
-    {   // TODO: сделать нормальное отображения текста, навигацию по страницу
+    {
         book = new Book(path);
         book->ParseBookFile();
-        ui->bookLabel->setStyleSheet(WidgetStyle::GetBookLabelStyle());
-        QString lineHeightHTML = "<p style=\"line-height:%1%\">%2<p>";
-        QString targetText = lineHeightHTML.arg(120).arg(book->GetBookText());
-        ui->programTab->setCurrentIndex(1);
-        ui->bookLabel->setText(targetText);
+        QString bookText = book->GetBookText();
+        ConfigureBookTab();
+        SetBookLabelText(bookText);
+
     }
 }
 
@@ -68,10 +67,10 @@ void MainWindow::ConfigureTabWidget()
     ui->programTab->setCurrentIndex(0);
 }
 
-void MainWindow::ConfigureStartLabel()
+void MainWindow::ConfigureMainWindowLabel()
 {
-    ui->startLabel->setStyleSheet(WidgetStyle::GetStartLabelStyle());
-    ui->startLabel->setText("Book   Reader");
+    ui->mainWindowLabel->setStyleSheet(WidgetStyle::GetMainWindowLabelStyle());
+    ui->mainWindowLabel->setText("Book   Reader");
 }
 
 void MainWindow::ConfigureAboutProgramLabel()
@@ -92,3 +91,30 @@ void MainWindow::ConfigurePageNumberLabels()
     ui->slashLabel->setStyleSheet(WidgetStyle::GetPageNumberLabelsStyle());
     ui->totalPagesNumberLabel->setStyleSheet(WidgetStyle::GetPageNumberLabelsStyle());
 }
+
+void MainWindow::ConfigureBookTab()
+{
+    ui->programTab->setCurrentIndex(1);
+    ui->bookLabel->setStyleSheet(WidgetStyle::GetBookLabelStyle());
+    ui->totalPagesNumberLabel->setText(QString::number(book->GetTotalPagesNumber()));
+    ui->currentPageNumberLabel->setText(QString::number(book->GetCurrentPageNumber()));
+}
+
+void MainWindow::SetBookLabelText(QString bookText)
+{
+    QString pageText;
+    for (int i = 0; i < book->GetPageSize(); i++)
+    {
+        pageText.append(bookText[(book->GetCurrentPageNumber() - 1) * book->GetPageSize() + i]);
+    }
+
+    ui->bookLabel->setText(pageText);
+}
+
+void MainWindow::on_nextPageButton_clicked()
+{
+    book->SetCurrentPageNumber(book->GetCurrentPageNumber() + 1);
+    ui->currentPageNumberLabel->setText(QString::number(book->GetCurrentPageNumber()));
+    SetBookLabelText(book->GetBookText());
+}
+

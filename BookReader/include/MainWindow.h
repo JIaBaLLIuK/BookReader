@@ -20,17 +20,21 @@ private slots:
     void on_toStartMenuButton_clicked();
     void on_chooseFileButton_clicked();
 
+    void on_nextPageButton_clicked();
+
 private:
     void ConfigureMainWindow();
     void ConfigureTabWidget();
-    void ConfigureStartLabel();
+    void ConfigureMainWindowLabel();
     void ConfigureAboutProgramLabel();
     void ConfigurePageNumberLabels();
+    void ConfigureBookTab();
+    void SetBookLabelText(QString);
 
     Ui::MainWindow* ui;
+    Book* book;
     const int WINDOW_WIDTH = 1360;
     const int WINDOW_HEIGHT = 800;
-    Book* book;
 };
 
 #endif // MAIN_WINDOW_H

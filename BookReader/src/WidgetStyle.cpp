@@ -22,7 +22,7 @@ QString WidgetStyle::GetAboutPogramLabelStyle()
            "}";
 }
 
-QString WidgetStyle::GetStartLabelStyle()
+QString WidgetStyle::GetMainWindowLabelStyle()
 {
     return "QLabel {"
                 "qproperty-wordWrap: false;"

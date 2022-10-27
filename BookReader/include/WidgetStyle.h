@@ -8,7 +8,7 @@ class WidgetStyle
 public:
     static QString GetTabStyle();
     static QString GetAboutPogramLabelStyle();
-    static QString GetStartLabelStyle();
+    static QString GetMainWindowLabelStyle();
     static QString GetPageNumberLabelsStyle();
     static QString GetBookLabelStyle();
 };

@@ -1,14 +1,15 @@
 #include <QFile>
-//#include <QXmlStreamReader>
+#include <QXmlStreamReader>
 #include <QMessageBox>
 
 #include <QDebug>
 
 #include "../include/Book.h"
 
-Book::Book(QString pathToBookFile) : pathToBookFile(pathToBookFile)
+Book::Book(QString pathToBookFile) : pathToBookFile(pathToBookFile), currentPageNumber(1)
 {
     bookText = "";
+    pageSize = MAX_STRING_LENGTH * MAX_STRING_AMOUNT;
 }
 
 void Book::SetPathToBookFile(QString pathToBookFile)
@@ -61,12 +62,35 @@ void Book::SetBookText(QXmlStreamReader& xmlFile)
             xmlFile.readNextStartElement();
             tag = xmlFile.name().toString();
         }
-        // сделать нормальное считывание текста книги (считывает лишнее, весь текст идет подряд)
-        bookText.append(xmlFile.readElementText(QXmlStreamReader::ReadElementTextBehaviour::IncludeChildElements) + " ");
+
+        QString readedText = "      " + xmlFile.readElementText(QXmlStreamReader::ReadElementTextBehaviour::IncludeChildElements) + '\n';
+        bookText.append(readedText);
     }
+
+    totalPagesNumber = bookText.length() / pageSize + 1;
 }
 
 QString Book::GetBookText() const
 {
     return bookText;
+}
+
+int Book::GetPageSize() const
+{
+    return pageSize;
+}
+
+int Book::GetTotalPagesNumber() const
+{
+    return totalPagesNumber;
+}
+
+int Book::GetCurrentPageNumber() const
+{
+    return currentPageNumber;
+}
+
+void Book::SetCurrentPageNumber(int currentPageNumber)
+{
+    this->currentPageNumber = currentPageNumber;
 }
