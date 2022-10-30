@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
@@ -36,6 +37,7 @@ public:
     QLabel *slashLabel;
     QLabel *totalPagesNumberLabel;
     QLabel *currentPageNumberLabel;
+    QFrame *line;
     QWidget *aboutTab;
     QLabel *aboutProgramLabel;
     QPushButton *chooseFileButton;
@@ -101,6 +103,14 @@ public:
         currentPageNumberLabel->setObjectName(QString::fromUtf8("currentPageNumberLabel"));
         currentPageNumberLabel->setGeometry(QRect(370, 740, 50, 25));
         currentPageNumberLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        line = new QFrame(bookTab);
+        line->setObjectName(QString::fromUtf8("line"));
+        line->setGeometry(QRect(0, 720, 950, 3));
+        QFont font;
+        font.setBold(false);
+        line->setFont(font);
+        line->setFrameShape(QFrame::HLine);
+        line->setFrameShadow(QFrame::Sunken);
         programTab->addTab(bookTab, QString());
         aboutTab = new QWidget();
         aboutTab->setObjectName(QString::fromUtf8("aboutTab"));

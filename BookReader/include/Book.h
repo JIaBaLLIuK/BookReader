@@ -12,18 +12,18 @@ public:
     void SetPathToBookFile(QString);
     void ParseBookFile();
     void SetBookText(QXmlStreamReader&);
-    QString GetBookText() const;
-    int GetPageSize() const;
+    void SetTotalPagesNumber();
+    QList<QString> GetBookText() const;
     int GetTotalPagesNumber() const;
     int GetCurrentPageNumber() const;
     void SetCurrentPageNumber(int);
+    int GetMaxStringAmount() const;
 
 private:
     QString pathToBookFile;
-    QString bookText;
+    QList<QString> bookText;
     const int MAX_STRING_LENGTH = 95;
     const int MAX_STRING_AMOUNT = 31;
-    int pageSize;
     int totalPagesNumber;
     int currentPageNumber;
 };

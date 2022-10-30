@@ -7,10 +7,7 @@
 #include "../include/Book.h"
 
 Book::Book(QString pathToBookFile) : pathToBookFile(pathToBookFile), currentPageNumber(1)
-{
-    bookText = "";
-    pageSize = MAX_STRING_LENGTH * MAX_STRING_AMOUNT;
-}
+{ }
 
 void Book::SetPathToBookFile(QString pathToBookFile)
 {
@@ -64,20 +61,49 @@ void Book::SetBookText(QXmlStreamReader& xmlFile)
         }
 
         QString readedText = "      " + xmlFile.readElementText(QXmlStreamReader::ReadElementTextBehaviour::IncludeChildElements) + '\n';
+
+        if (readedText.length() <= MAX_STRING_LENGTH)
+        {
+            bookText.append(readedText);
+            continue;
+        }
+
+        while (readedText.length() > MAX_STRING_LENGTH)
+        {
+            QString textToAppend;
+            for (int i = 0; i  < MAX_STRING_LENGTH; i++)
+            {
+                textToAppend.append(readedText[i]);
+            }
+
+            int length = textToAppend.length();
+            textToAppend.append('\n');
+
+            readedText = readedText.remove(0, length);
+            bookText.append(textToAppend);
+        }
+
         bookText.append(readedText);
     }
 
-    totalPagesNumber = bookText.length() / pageSize + 1;
+    SetTotalPagesNumber();
 }
 
-QString Book::GetBookText() const
+void Book::SetTotalPagesNumber()
+{
+    if (bookText.size() % MAX_STRING_AMOUNT == 0)
+    {
+        totalPagesNumber = bookText.size() / MAX_STRING_AMOUNT;
+    }
+    else
+    {
+        totalPagesNumber = bookText.size() / MAX_STRING_AMOUNT + 1;
+    }
+}
+
+QList<QString> Book::GetBookText() const
 {
     return bookText;
-}
-
-int Book::GetPageSize() const
-{
-    return pageSize;
 }
 
 int Book::GetTotalPagesNumber() const
@@ -93,4 +119,9 @@ int Book::GetCurrentPageNumber() const
 void Book::SetCurrentPageNumber(int currentPageNumber)
 {
     this->currentPageNumber = currentPageNumber;
+}
+
+int Book::GetMaxStringAmount() const
+{
+    return MAX_STRING_AMOUNT;
 }

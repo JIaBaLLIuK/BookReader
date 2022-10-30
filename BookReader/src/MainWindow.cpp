@@ -12,9 +12,6 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     ConfigureTabWidget();
     ConfigureMainWindowLabel();
     ConfigureAboutProgramLabel();
-    ConfigurePageNumberLabels();
-
-
 }
 
 MainWindow::~MainWindow()
@@ -35,19 +32,45 @@ void MainWindow::on_toStartMenuButton_clicked()
 void MainWindow::on_chooseFileButton_clicked()
 {
     QString path = QFileDialog::getOpenFileName(this, "Выберите файл", "C:", "Book file (*.fb2)");
-    if (path.isEmpty())
+    if (!path.endsWith(".fb2"))
     {
-        QMessageBox::warning(this, "Ошибка!", "Вы не выбрали файл!");
+        QMessageBox::warning(this, "", "Вы не выбрали .fb2 файл!");
     }
     else
     {
         book = new Book(path);
         book->ParseBookFile();
-        QString bookText = book->GetBookText();
         ConfigureBookTab();
-        SetBookLabelText(bookText);
-
+        SetBookLabelText(book->GetBookText(), 1);
     }
+}
+
+void MainWindow::on_nextPageButton_clicked()
+{
+    int currentPageNumber = book->GetCurrentPageNumber() + 1;
+    if (currentPageNumber > book->GetTotalPagesNumber())
+    {
+        QMessageBox::information(this, "", "Вы дочитали до конца!");
+        return;
+    }
+
+    book->SetCurrentPageNumber(currentPageNumber);
+    ui->currentPageNumberLabel->setText(QString::number(currentPageNumber));
+    SetBookLabelText(book->GetBookText(), currentPageNumber);
+}
+
+void MainWindow::on_previousPageButton_clicked()
+{
+    int currentPageNumber = book->GetCurrentPageNumber() - 1;
+    if (currentPageNumber <= 0)
+    {
+        QMessageBox::information(this, "", "Вы не можете вернуться назад!");
+        return;
+    }
+
+    book->SetCurrentPageNumber(currentPageNumber);
+    ui->currentPageNumberLabel->setText(QString::number(currentPageNumber));
+    SetBookLabelText(book->GetBookText(), currentPageNumber);
 }
 
 void MainWindow::ConfigureMainWindow()
@@ -85,36 +108,26 @@ void MainWindow::ConfigureAboutProgramLabel()
                                    "для перехода на предыдущую страницу — нажать на кнопку \"<\".");
 }
 
-void MainWindow::ConfigurePageNumberLabels()
-{
-    ui->currentPageNumberLabel->setStyleSheet(WidgetStyle::GetPageNumberLabelsStyle());
-    ui->slashLabel->setStyleSheet(WidgetStyle::GetPageNumberLabelsStyle());
-    ui->totalPagesNumberLabel->setStyleSheet(WidgetStyle::GetPageNumberLabelsStyle());
-}
-
 void MainWindow::ConfigureBookTab()
 {
     ui->programTab->setCurrentIndex(1);
     ui->bookLabel->setStyleSheet(WidgetStyle::GetBookLabelStyle());
+    ui->totalPagesNumberLabel->setStyleSheet(WidgetStyle::GetPageNumberLabelsStyle());
     ui->totalPagesNumberLabel->setText(QString::number(book->GetTotalPagesNumber()));
-    ui->currentPageNumberLabel->setText(QString::number(book->GetCurrentPageNumber()));
+    ui->currentPageNumberLabel->setStyleSheet(WidgetStyle::GetPageNumberLabelsStyle());
+    ui->currentPageNumberLabel->setText(QString::number(book->GetCurrentPageNumber()));   
+    ui->slashLabel->setStyleSheet(WidgetStyle::GetPageNumberLabelsStyle());
 }
 
-void MainWindow::SetBookLabelText(QString bookText)
+void MainWindow::SetBookLabelText(QList<QString> bookText, int currentPageNumber)
 {
     QString pageText;
-    for (int i = 0; i < book->GetPageSize(); i++)
+    int maxStringAmount = book->GetMaxStringAmount();
+
+    for (int i = 0; i < maxStringAmount; i++)
     {
-        pageText.append(bookText[(book->GetCurrentPageNumber() - 1) * book->GetPageSize() + i]);
+        pageText.append(bookText[(currentPageNumber - 1) * maxStringAmount + i]);
     }
 
     ui->bookLabel->setText(pageText);
 }
-
-void MainWindow::on_nextPageButton_clicked()
-{
-    book->SetCurrentPageNumber(book->GetCurrentPageNumber() + 1);
-    ui->currentPageNumberLabel->setText(QString::number(book->GetCurrentPageNumber()));
-    SetBookLabelText(book->GetBookText());
-}
-

@@ -19,17 +19,17 @@ private slots:
     void on_aboutProgramButton_clicked();
     void on_toStartMenuButton_clicked();
     void on_chooseFileButton_clicked();
-
     void on_nextPageButton_clicked();
+
+    void on_previousPageButton_clicked();
 
 private:
     void ConfigureMainWindow();
     void ConfigureTabWidget();
     void ConfigureMainWindowLabel();
     void ConfigureAboutProgramLabel();
-    void ConfigurePageNumberLabels();
     void ConfigureBookTab();
-    void SetBookLabelText(QString);
+    void SetBookLabelText(QList<QString>, int);
 
     Ui::MainWindow* ui;
     Book* book;
