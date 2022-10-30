@@ -131,7 +131,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>&lt;</string>
+       <string>&lt;-</string>
       </property>
      </widget>
      <widget class="QPushButton" name="nextPageButton">
@@ -144,14 +144,14 @@
        </rect>
       </property>
       <property name="text">
-       <string>&gt;</string>
+       <string>-&gt;</string>
       </property>
      </widget>
      <widget class="QLabel" name="slashLabel">
       <property name="geometry">
        <rect>
         <x>420</x>
-        <y>740</y>
+        <y>738</y>
         <width>10</width>
         <height>25</height>
        </rect>

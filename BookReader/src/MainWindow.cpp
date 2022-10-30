@@ -104,8 +104,8 @@ void MainWindow::ConfigureAboutProgramLabel()
                                    "1) нажать на кнопку \"Выбрать файл\" в левой части окна;\n"
                                    "2) в открывшемся диалоговом окне выбрать файл, имеющий расширений .fb2;\n"
                                    "3) выбрав нужный файл, нажать кнопку \"Открыть\".\n"
-                                   "После открытия файла для перехода на следующую страницу необходимо нажать на кнопку \">\" в нижней части экрана, "
-                                   "для перехода на предыдущую страницу — нажать на кнопку \"<\".");
+                                   "После открытия файла для перехода на следующую страницу необходимо нажать на кнопку \"->\" в нижней части экрана, "
+                                   "для перехода на предыдущую страницу — нажать на кнопку \"<-\".");
 }
 
 void MainWindow::ConfigureBookTab()
@@ -116,14 +116,13 @@ void MainWindow::ConfigureBookTab()
     ui->totalPagesNumberLabel->setText(QString::number(book->GetTotalPagesNumber()));
     ui->currentPageNumberLabel->setStyleSheet(WidgetStyle::GetPageNumberLabelsStyle());
     ui->currentPageNumberLabel->setText(QString::number(book->GetCurrentPageNumber()));   
-    ui->slashLabel->setStyleSheet(WidgetStyle::GetPageNumberLabelsStyle());
+    ui->slashLabel->setStyleSheet("font-size: 18px;");
 }
 
 void MainWindow::SetBookLabelText(QList<QString> bookText, int currentPageNumber)
 {
     QString pageText;
     int maxStringAmount = book->GetMaxStringAmount();
-
     for (int i = 0; i < maxStringAmount; i++)
     {
         pageText.append(bookText[(currentPageNumber - 1) * maxStringAmount + i]);

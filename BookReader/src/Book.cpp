@@ -77,6 +77,15 @@ void Book::SetBookText(QXmlStreamReader& xmlFile)
             }
 
             int length = textToAppend.length();
+            length--;
+            while (textToAppend[length] != ',' && textToAppend[length] != ';' && textToAppend[length] != ':' && textToAppend[length] != '.'
+                    && textToAppend[length] != '?' && textToAppend[length] != '!' && (textToAppend[length] != ' ' && readedText[length] != ' '))
+            {
+                textToAppend.remove(length, 1);
+                length--;
+            }
+
+            length++;
             textToAppend.append('\n');
 
             readedText = readedText.remove(0, length);

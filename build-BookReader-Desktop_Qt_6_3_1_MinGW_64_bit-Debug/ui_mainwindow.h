@@ -93,7 +93,7 @@ public:
         nextPageButton->setGeometry(QRect(900, 740, 40, 25));
         slashLabel = new QLabel(bookTab);
         slashLabel->setObjectName(QString::fromUtf8("slashLabel"));
-        slashLabel->setGeometry(QRect(420, 740, 10, 25));
+        slashLabel->setGeometry(QRect(420, 738, 10, 25));
         slashLabel->setAlignment(Qt::AlignCenter);
         totalPagesNumberLabel = new QLabel(bookTab);
         totalPagesNumberLabel->setObjectName(QString::fromUtf8("totalPagesNumberLabel"));
@@ -141,8 +141,8 @@ public:
         mainWindowLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         programTab->setTabText(programTab->indexOf(startTab), QCoreApplication::translate("MainWindow", "start", nullptr));
         bookLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
-        previousPageButton->setText(QCoreApplication::translate("MainWindow", "<", nullptr));
-        nextPageButton->setText(QCoreApplication::translate("MainWindow", ">", nullptr));
+        previousPageButton->setText(QCoreApplication::translate("MainWindow", "<-", nullptr));
+        nextPageButton->setText(QCoreApplication::translate("MainWindow", "->", nullptr));
         slashLabel->setText(QCoreApplication::translate("MainWindow", "/", nullptr));
         totalPagesNumberLabel->setText(QString());
         currentPageNumberLabel->setText(QString());
