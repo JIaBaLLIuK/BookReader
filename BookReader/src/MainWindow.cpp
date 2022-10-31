@@ -34,7 +34,7 @@ void MainWindow::on_chooseFileButton_clicked()
     QString path = QFileDialog::getOpenFileName(this, "Выберите файл", "C:", "Book file (*.fb2)");
     if (!path.endsWith(".fb2"))
     {
-        QMessageBox::warning(this, "", "Вы не выбрали .fb2 файл!");
+       QMessageBox::warning(this, "", "Вы не выбрали .fb2 файл!");
     }
     else
     {
@@ -125,7 +125,13 @@ void MainWindow::SetBookLabelText(QList<QString> bookText, int currentPageNumber
     int maxStringAmount = book->GetMaxStringAmount();
     for (int i = 0; i < maxStringAmount; i++)
     {
-        pageText.append(bookText[(currentPageNumber - 1) * maxStringAmount + i]);
+        int index = (currentPageNumber - 1) * maxStringAmount + i;
+        if (index > bookText.size() - 1)
+        {
+            break;
+        }
+
+        pageText.append(bookText[index]);
     }
 
     ui->bookLabel->setText(pageText);

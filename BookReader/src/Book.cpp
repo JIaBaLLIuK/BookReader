@@ -86,7 +86,7 @@ void Book::SetBookText(QXmlStreamReader& xmlFile)
             }
 
             length++;
-            textToAppend.append('\n');
+            //textToAppend.append('\n');
 
             readedText = readedText.remove(0, length);
             bookText.append(textToAppend);
