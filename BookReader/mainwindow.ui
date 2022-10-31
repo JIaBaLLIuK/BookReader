@@ -124,8 +124,8 @@
      <widget class="QPushButton" name="previousPageButton">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>740</y>
+        <x>5</x>
+        <y>725</y>
         <width>40</width>
         <height>25</height>
        </rect>
@@ -137,8 +137,8 @@
      <widget class="QPushButton" name="nextPageButton">
       <property name="geometry">
        <rect>
-        <x>900</x>
-        <y>740</y>
+        <x>905</x>
+        <y>725</y>
         <width>40</width>
         <height>25</height>
        </rect>
@@ -151,7 +151,7 @@
       <property name="geometry">
        <rect>
         <x>420</x>
-        <y>738</y>
+        <y>723</y>
         <width>10</width>
         <height>25</height>
        </rect>
@@ -167,7 +167,7 @@
       <property name="geometry">
        <rect>
         <x>430</x>
-        <y>740</y>
+        <y>725</y>
         <width>50</width>
         <height>25</height>
        </rect>
@@ -183,7 +183,7 @@
       <property name="geometry">
        <rect>
         <x>370</x>
-        <y>740</y>
+        <y>725</y>
         <width>50</width>
         <height>25</height>
        </rect>
@@ -211,6 +211,29 @@
       </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="findPageButton">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>753</y>
+        <width>25</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="findPageLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>395</x>
+        <y>753</y>
+        <width>70</width>
+        <height>20</height>
+       </rect>
       </property>
      </widget>
     </widget>

@@ -21,6 +21,7 @@ private slots:
     void on_chooseFileButton_clicked();
     void on_nextPageButton_clicked();
     void on_previousPageButton_clicked();
+    void on_findPageButton_clicked();
 
 private:
     void ConfigureMainWindow();
@@ -30,6 +31,7 @@ private:
     void ConfigureBookTab();
     void ConfigurePageButtons();
     void SetBookLabelText(QList<QString>, int);
+    void FindPage();
 
     Ui::MainWindow* ui;
     Book* book;

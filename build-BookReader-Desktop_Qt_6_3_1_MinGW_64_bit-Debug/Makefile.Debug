@@ -112,6 +112,7 @@ compiler_rcc_clean:
 	-$(DEL_FILE) debug\qrc_resources.cpp
 debug/qrc_resources.cpp: ../BookReader/resources.qrc \
 		E:/Qt/6.3.1/mingw_64/bin/rcc.exe \
+		../BookReader/img/magnifier_icon.png \
 		../BookReader/img/program_icon.png \
 		../BookReader/img/book_image.jpg
 	E:\Qt\6.3.1\mingw_64\bin\rcc.exe -name resources ..\BookReader\resources.qrc -o debug\qrc_resources.cpp
@@ -615,6 +616,12 @@ debug/MainWindow.o: ../BookReader/src/MainWindow.cpp E:/Qt/6.3.1/mingw_64/includ
 		E:/Qt/6.3.1/mingw_64/include/QtWidgets/qlabel.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qpicture.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qtextdocument.h \
+		E:/Qt/6.3.1/mingw_64/include/QtWidgets/QLineEdit \
+		E:/Qt/6.3.1/mingw_64/include/QtWidgets/qlineedit.h \
+		E:/Qt/6.3.1/mingw_64/include/QtGui/qtextcursor.h \
+		E:/Qt/6.3.1/mingw_64/include/QtGui/qtextformat.h \
+		E:/Qt/6.3.1/mingw_64/include/QtGui/qpen.h \
+		E:/Qt/6.3.1/mingw_64/include/QtGui/qtextoption.h \
 		E:/Qt/6.3.1/mingw_64/include/QtWidgets/QPushButton \
 		E:/Qt/6.3.1/mingw_64/include/QtWidgets/qpushbutton.h \
 		E:/Qt/6.3.1/mingw_64/include/QtWidgets/qabstractbutton.h \

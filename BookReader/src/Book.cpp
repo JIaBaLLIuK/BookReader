@@ -61,7 +61,6 @@ void Book::SetBookText(QXmlStreamReader& xmlFile)
         }
 
         QString readedText = "      " + xmlFile.readElementText(QXmlStreamReader::ReadElementTextBehaviour::IncludeChildElements) + '\n';
-
         if (readedText.length() <= MAX_STRING_LENGTH)
         {
             bookText.append(readedText);
@@ -86,8 +85,6 @@ void Book::SetBookText(QXmlStreamReader& xmlFile)
             }
 
             length++;
-            //textToAppend.append('\n');
-
             readedText = readedText.remove(0, length);
             bookText.append(textToAppend);
         }

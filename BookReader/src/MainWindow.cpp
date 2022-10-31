@@ -73,6 +73,22 @@ void MainWindow::on_previousPageButton_clicked()
     SetBookLabelText(book->GetBookText(), currentPageNumber);
 }
 
+void MainWindow::on_findPageButton_clicked()
+{
+    int page = ui->findPageLineEdit->text().toInt();
+    if (page < 1 || page > book->GetTotalPagesNumber())
+    {
+        QMessageBox::warning(this, "", "Вы ввели неверное значение!");
+        ui->findPageLineEdit->setText("");
+        return;
+    }
+
+    ui->findPageLineEdit->setText("");
+    ui->currentPageNumberLabel->setText(QString::number(page));
+    book->SetCurrentPageNumber(page);
+    SetBookLabelText(book->GetBookText(), page);
+}
+
 void MainWindow::ConfigureMainWindow()
 {
     this->setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -105,18 +121,28 @@ void MainWindow::ConfigureAboutProgramLabel()
                                    "2) в открывшемся диалоговом окне выбрать файл, имеющий расширений .fb2;\n"
                                    "3) выбрав нужный файл, нажать кнопку \"Открыть\".\n"
                                    "После открытия файла для перехода на следующую страницу необходимо нажать на кнопку \"->\" в нижней части экрана, "
-                                   "для перехода на предыдущую страницу — нажать на кнопку \"<-\".");
+                                   "для перехода на предыдущую страницу — нажать на кнопку \"<-\".\n"
+                                   "Если необходимо перейти на конкретную страницу, то необходимо в поле снизу ввести номер страницы и нажать на "
+                                   "клавишу \"Enter\" либо на кнопку с изображенной на ней лупой.");
 }
 
 void MainWindow::ConfigureBookTab()
 {
     ui->programTab->setCurrentIndex(1);
     ui->bookLabel->setStyleSheet(WidgetStyle::GetBookLabelStyle());
+
     ui->totalPagesNumberLabel->setStyleSheet(WidgetStyle::GetPageNumberLabelsStyle());
     ui->totalPagesNumberLabel->setText(QString::number(book->GetTotalPagesNumber()));
     ui->currentPageNumberLabel->setStyleSheet(WidgetStyle::GetPageNumberLabelsStyle());
     ui->currentPageNumberLabel->setText(QString::number(book->GetCurrentPageNumber()));   
     ui->slashLabel->setStyleSheet("font-size: 18px;");
+
+    QIcon findPageButtonIcon(":/img/magnifier_icon.png");
+    ui->findPageButton->setIcon(findPageButtonIcon);
+    ui->findPageButton->setIconSize(ui->findPageButton->size());
+    ui->findPageButton->setStyleSheet(WidgetStyle::GetFindPageButtonStyle());
+    ui->findPageLineEdit->setStyleSheet(WidgetStyle::GetFindPageLineEditStyle());
+    connect(ui->findPageLineEdit, SIGNAL(returnPressed()), ui->findPageButton, SIGNAL(clicked()));
 }
 
 void MainWindow::SetBookLabelText(QList<QString> bookText, int currentPageNumber)

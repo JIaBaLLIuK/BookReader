@@ -19,7 +19,7 @@ QString WidgetStyle::GetAboutPogramLabelStyle()
                 "qproperty-wordWrap: true;"
                 "font-size: 20px;"
                 "font-family: \"Times New Roman\";"
-           "}";
+            "}";
 }
 
 QString WidgetStyle::GetMainWindowLabelStyle()
@@ -29,7 +29,7 @@ QString WidgetStyle::GetMainWindowLabelStyle()
                 "font-size: 70px;"
                 "font-family: \"Monotype Corsiva\";"
                 "font-weight: 500;"
-           "}";
+            "}";
 }
 
 QString WidgetStyle::GetPageNumberLabelsStyle()
@@ -38,7 +38,7 @@ QString WidgetStyle::GetPageNumberLabelsStyle()
                 "qproperty-wordWrap: false;"
                 "font-size: 16px;"
                 "font-family: \"Times New Roman\";"
-           "}";
+            "}";
 }
 
 QString WidgetStyle::GetBookLabelStyle()
@@ -47,5 +47,23 @@ QString WidgetStyle::GetBookLabelStyle()
                 "qproperty-wordWrap: true;"
                 "font-size: 20px;"
                 "font-family: \"Times New Roman\";"
+            "}";
+}
+
+QString WidgetStyle::GetFindPageButtonStyle()
+{
+    return "QPushButton {"
+                "background: #FAEBD7;"
+                "border: 0px solid white;"
            "}";
+}
+
+QString WidgetStyle::GetFindPageLineEditStyle()
+{
+    return "QLineEdit {"
+                "background: #FAEBD7;"
+                "border: 1px solid gray;"
+                "font-size: 16px;"
+                "font-family: \"Times New Roman\";"
+            "}";
 }

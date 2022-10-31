@@ -11,6 +11,8 @@ public:
     static QString GetMainWindowLabelStyle();
     static QString GetPageNumberLabelsStyle();
     static QString GetBookLabelStyle();
+    static QString GetFindPageButtonStyle();
+    static QString GetFindPageLineEditStyle();
 };
 
 #endif // WIDGET_STYLE_H

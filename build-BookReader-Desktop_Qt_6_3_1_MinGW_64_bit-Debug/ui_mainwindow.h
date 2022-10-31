@@ -13,6 +13,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTabWidget>
@@ -38,6 +39,8 @@ public:
     QLabel *totalPagesNumberLabel;
     QLabel *currentPageNumberLabel;
     QFrame *line;
+    QPushButton *findPageButton;
+    QLineEdit *findPageLineEdit;
     QWidget *aboutTab;
     QLabel *aboutProgramLabel;
     QPushButton *chooseFileButton;
@@ -87,21 +90,21 @@ public:
         bookLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         previousPageButton = new QPushButton(bookTab);
         previousPageButton->setObjectName(QString::fromUtf8("previousPageButton"));
-        previousPageButton->setGeometry(QRect(10, 740, 40, 25));
+        previousPageButton->setGeometry(QRect(5, 725, 40, 25));
         nextPageButton = new QPushButton(bookTab);
         nextPageButton->setObjectName(QString::fromUtf8("nextPageButton"));
-        nextPageButton->setGeometry(QRect(900, 740, 40, 25));
+        nextPageButton->setGeometry(QRect(905, 725, 40, 25));
         slashLabel = new QLabel(bookTab);
         slashLabel->setObjectName(QString::fromUtf8("slashLabel"));
-        slashLabel->setGeometry(QRect(420, 738, 10, 25));
+        slashLabel->setGeometry(QRect(420, 723, 10, 25));
         slashLabel->setAlignment(Qt::AlignCenter);
         totalPagesNumberLabel = new QLabel(bookTab);
         totalPagesNumberLabel->setObjectName(QString::fromUtf8("totalPagesNumberLabel"));
-        totalPagesNumberLabel->setGeometry(QRect(430, 740, 50, 25));
+        totalPagesNumberLabel->setGeometry(QRect(430, 725, 50, 25));
         totalPagesNumberLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
         currentPageNumberLabel = new QLabel(bookTab);
         currentPageNumberLabel->setObjectName(QString::fromUtf8("currentPageNumberLabel"));
-        currentPageNumberLabel->setGeometry(QRect(370, 740, 50, 25));
+        currentPageNumberLabel->setGeometry(QRect(370, 725, 50, 25));
         currentPageNumberLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         line = new QFrame(bookTab);
         line->setObjectName(QString::fromUtf8("line"));
@@ -111,6 +114,12 @@ public:
         line->setFont(font);
         line->setFrameShape(QFrame::HLine);
         line->setFrameShadow(QFrame::Sunken);
+        findPageButton = new QPushButton(bookTab);
+        findPageButton->setObjectName(QString::fromUtf8("findPageButton"));
+        findPageButton->setGeometry(QRect(370, 753, 25, 25));
+        findPageLineEdit = new QLineEdit(bookTab);
+        findPageLineEdit->setObjectName(QString::fromUtf8("findPageLineEdit"));
+        findPageLineEdit->setGeometry(QRect(395, 753, 70, 20));
         programTab->addTab(bookTab, QString());
         aboutTab = new QWidget();
         aboutTab->setObjectName(QString::fromUtf8("aboutTab"));
@@ -146,6 +155,7 @@ public:
         slashLabel->setText(QCoreApplication::translate("MainWindow", "/", nullptr));
         totalPagesNumberLabel->setText(QString());
         currentPageNumberLabel->setText(QString());
+        findPageButton->setText(QString());
         programTab->setTabText(programTab->indexOf(bookTab), QCoreApplication::translate("MainWindow", "book", nullptr));
         aboutProgramLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         programTab->setTabText(programTab->indexOf(aboutTab), QCoreApplication::translate("MainWindow", "about", nullptr));

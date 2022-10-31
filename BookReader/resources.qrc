@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>img/program_icon.png</file>
         <file>img/book_image.jpg</file>
+        <file>img/magnifier_icon.png</file>
     </qresource>
 </RCC>
