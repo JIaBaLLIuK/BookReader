@@ -1,8 +1,5 @@
 #include <QFile>
-#include <QXmlStreamReader>
 #include <QMessageBox>
-
-#include <QDebug>
 
 #include "../include/Book.h"
 
@@ -47,6 +44,7 @@ void Book::SetBookText(QXmlStreamReader& xmlFile)
     QString tag;
     while (tag != "body")
     {
+        QString readedText;
         xmlFile.readNextStartElement();
         tag = xmlFile.name().toString();
         if (xmlFile.isEndElement())
@@ -54,42 +52,20 @@ void Book::SetBookText(QXmlStreamReader& xmlFile)
             continue;
         }
 
-        while (tag != "p")
+        while (tag != "p" && tag != "title")
         {
             xmlFile.readNextStartElement();
             tag = xmlFile.name().toString();
         }
 
-        QString readedText = "      " + xmlFile.readElementText(QXmlStreamReader::ReadElementTextBehaviour::IncludeChildElements) + '\n';
-        if (readedText.length() <= MAX_STRING_LENGTH)
+        if (tag == "p")
         {
-            bookText.append(readedText);
-            continue;
+            SetParagraphStyle(xmlFile.readElementText(QXmlStreamReader::ReadElementTextBehaviour::IncludeChildElements));
         }
-
-        while (readedText.length() > MAX_STRING_LENGTH)
+        else
         {
-            QString textToAppend;
-            for (int i = 0; i  < MAX_STRING_LENGTH; i++)
-            {
-                textToAppend.append(readedText[i]);
-            }
-
-            int length = textToAppend.length();
-            length--;
-            while (textToAppend[length] != ',' && textToAppend[length] != ';' && textToAppend[length] != ':' && textToAppend[length] != '.'
-                    && textToAppend[length] != '?' && textToAppend[length] != '!' && (textToAppend[length] != ' ' && readedText[length] != ' '))
-            {
-                textToAppend.remove(length, 1);
-                length--;
-            }
-
-            length++;
-            readedText = readedText.remove(0, length);
-            bookText.append(textToAppend);
+             SetTitleStyle(xmlFile);
         }
-
-        bookText.append(readedText);
     }
 
     SetTotalPagesNumber();
@@ -110,6 +86,63 @@ void Book::SetTotalPagesNumber()
 QList<QString> Book::GetBookText() const
 {
     return bookText;
+}
+
+void Book::SetTitleStyle(QXmlStreamReader& xmlFile)
+{
+    QString tag;
+    while (tag != "title")
+    {
+        QString readedText;
+        xmlFile.readNextStartElement();
+        tag = xmlFile.name().toString();
+        if (xmlFile.isEndElement())
+        {
+            continue;
+        }
+
+        while (tag != "p")
+        {
+            xmlFile.readNextStartElement();
+            tag = xmlFile.name().toString();
+        }
+
+        bookText.append("<p align = 'center'><b>" + xmlFile.readElementText(QXmlStreamReader::ReadElementTextBehaviour::IncludeChildElements) +
+                        "</p></b>");
+    }
+}
+
+void Book::SetParagraphStyle(QString paragraphText)
+{
+    if (paragraphText.length() <= MAX_STRING_LENGTH)
+    {
+        bookText.append("<p style= \"margin: 0\">" + paragraphText + "</p>");
+        return;
+    }
+
+    while (paragraphText.length() > MAX_STRING_LENGTH)
+    {
+        QString textToAppend;
+        for (int i = 0; i  < MAX_STRING_LENGTH; i++)
+        {
+            textToAppend.append(paragraphText[i]);
+        }
+
+        int length = textToAppend.length();
+        length--;
+        while (textToAppend[length] != ',' && textToAppend[length] != ';' && textToAppend[length] != ':' && textToAppend[length] != '.'
+                && textToAppend[length] != '?' && textToAppend[length] != '!' && (textToAppend[length] != ' ' && paragraphText[length] != ' '))
+        {
+            textToAppend.remove(length, 1);
+            length--;
+        }
+
+        length++;
+        paragraphText = paragraphText.remove(0, length);
+        bookText.append("<p style= \"margin: 0\">" + textToAppend + "</p>");
+    }
+
+    bookText.append("<p style= \"margin: 0\">" + paragraphText + "</p>");
 }
 
 int Book::GetTotalPagesNumber() const

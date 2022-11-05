@@ -34,7 +34,7 @@ void MainWindow::on_chooseFileButton_clicked()
     QString path = QFileDialog::getOpenFileName(this, "Выберите файл", "C:", "Book file (*.fb2)");
     if (!path.endsWith(".fb2"))
     {
-       QMessageBox::warning(this, "", "Вы не выбрали .fb2 файл!");
+       QMessageBox::warning(this, "", "Вы не выбрали файл!");
     }
     else
     {
@@ -118,12 +118,12 @@ void MainWindow::ConfigureAboutProgramLabel()
     ui->aboutProgramLabel->setText("    Эта программа предназначена для чтения электронных книг, имеющих расширение .fb2. "
                                    "Для того, чтобы начать читать, необходимо:\n"
                                    "1) нажать на кнопку \"Выбрать файл\" в левой части окна;\n"
-                                   "2) в открывшемся диалоговом окне выбрать файл, имеющий расширений .fb2;\n"
+                                   "2) в открывшемся диалоговом окне выбрать файл, имеющий расширение .fb2;\n"
                                    "3) выбрав нужный файл, нажать кнопку \"Открыть\".\n"
                                    "После открытия файла для перехода на следующую страницу необходимо нажать на кнопку \"->\" в нижней части экрана, "
                                    "для перехода на предыдущую страницу — нажать на кнопку \"<-\".\n"
-                                   "Если необходимо перейти на конкретную страницу, то необходимо в поле снизу ввести номер страницы и нажать на "
-                                   "клавишу \"Enter\" либо на кнопку с изображенной на ней лупой.");
+                                   "Если необходимо перейти на конкретную страницу, то необходимо в поле снизу ввести номер страницы и "
+                                   "нажать на кнопку с изображенной на ней лупой.");
 }
 
 void MainWindow::ConfigureBookTab()
@@ -142,7 +142,6 @@ void MainWindow::ConfigureBookTab()
     ui->findPageButton->setIconSize(ui->findPageButton->size());
     ui->findPageButton->setStyleSheet(WidgetStyle::GetFindPageButtonStyle());
     ui->findPageLineEdit->setStyleSheet(WidgetStyle::GetFindPageLineEditStyle());
-    connect(ui->findPageLineEdit, SIGNAL(returnPressed()), ui->findPageButton, SIGNAL(clicked()));
 }
 
 void MainWindow::SetBookLabelText(QList<QString> bookText, int currentPageNumber)

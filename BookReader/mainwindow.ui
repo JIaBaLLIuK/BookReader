@@ -111,7 +111,7 @@
         <x>0</x>
         <y>0</y>
         <width>940</width>
-        <height>717</height>
+        <height>720</height>
        </rect>
       </property>
       <property name="text">
@@ -125,7 +125,7 @@
       <property name="geometry">
        <rect>
         <x>5</x>
-        <y>725</y>
+        <y>733</y>
         <width>40</width>
         <height>25</height>
        </rect>
@@ -138,7 +138,7 @@
       <property name="geometry">
        <rect>
         <x>905</x>
-        <y>725</y>
+        <y>733</y>
         <width>40</width>
         <height>25</height>
        </rect>
@@ -195,6 +195,29 @@
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
      </widget>
+     <widget class="QPushButton" name="findPageButton">
+      <property name="geometry">
+       <rect>
+        <x>375</x>
+        <y>753</y>
+        <width>25</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="findPageLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>753</y>
+        <width>70</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
      <widget class="Line" name="line">
       <property name="geometry">
        <rect>
@@ -211,29 +234,6 @@
       </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="findPageButton">
-      <property name="geometry">
-       <rect>
-        <x>370</x>
-        <y>753</y>
-        <width>25</width>
-        <height>25</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="findPageLineEdit">
-      <property name="geometry">
-       <rect>
-        <x>395</x>
-        <y>753</y>
-        <width>70</width>
-        <height>20</height>
-       </rect>
       </property>
      </widget>
     </widget>
