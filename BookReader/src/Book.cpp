@@ -6,11 +6,6 @@
 Book::Book(QString pathToBookFile) : pathToBookFile(pathToBookFile), currentPageNumber(1)
 { }
 
-void Book::SetPathToBookFile(QString pathToBookFile)
-{
-    this->pathToBookFile = pathToBookFile;
-}
-
 void Book::ParseBookFile()
 {
     QFile bookFile(pathToBookFile);
@@ -107,7 +102,8 @@ void Book::SetTitleStyle(QXmlStreamReader& xmlFile)
             tag = xmlFile.name().toString();
         }
 
-        bookText.append("<p align = 'center'><b>" + xmlFile.readElementText(QXmlStreamReader::ReadElementTextBehaviour::IncludeChildElements) +
+        bookText.append("<p align = 'center'><b>" +
+                        xmlFile.readElementText(QXmlStreamReader::ReadElementTextBehaviour::IncludeChildElements) +
                         "</p></b>");
     }
 }
@@ -116,10 +112,11 @@ void Book::SetParagraphStyle(QString paragraphText)
 {
     if (paragraphText.length() <= MAX_STRING_LENGTH)
     {
-        bookText.append("<p style= \"margin: 0\">" + paragraphText + "</p>");
+        bookText.append("<p style = \"margin-left: 30; margin-right: 0; margin-top: 0; margin-bottom: 0\">" + paragraphText + "</p>");
         return;
     }
 
+    bool isFirstLineOfParagraph = true;
     while (paragraphText.length() > MAX_STRING_LENGTH)
     {
         QString textToAppend;
@@ -139,10 +136,18 @@ void Book::SetParagraphStyle(QString paragraphText)
 
         length++;
         paragraphText = paragraphText.remove(0, length);
-        bookText.append("<p style= \"margin: 0\">" + textToAppend + "</p>");
+        if (isFirstLineOfParagraph)
+        {
+            bookText.append("<p style = \"margin-left: 30; margin-right: 0; margin-top: 0; margin-bottom: 0\">" + textToAppend + "</p>");
+            isFirstLineOfParagraph = false;
+        }
+        else
+        {
+            bookText.append("<p style = \"margin: 0\">" + textToAppend + "</p>");
+        }
     }
 
-    bookText.append("<p style= \"margin: 0\">" + paragraphText + "</p>");
+    bookText.append("<p style = \"margin: 0\">" + paragraphText + "</p>");
 }
 
 int Book::GetTotalPagesNumber() const
