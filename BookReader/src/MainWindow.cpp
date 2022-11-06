@@ -62,7 +62,7 @@ void MainWindow::on_nextPageButton_clicked()
 void MainWindow::on_previousPageButton_clicked()
 {
     int currentPageNumber = book->GetCurrentPageNumber() - 1;
-    if (currentPageNumber <= 0)
+    if (currentPageNumber == 0)
     {
         QMessageBox::information(this, "", "Вы не можете вернуться назад!");
         return;
