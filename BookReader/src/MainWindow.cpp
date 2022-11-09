@@ -5,7 +5,7 @@
 #include "../include/WidgetStyle.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow), book(new Book)
 {
     ui->setupUi(this);
     ConfigureMainWindow();
@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete book;
 }
 
 void MainWindow::on_aboutProgramButton_clicked()
@@ -38,7 +39,8 @@ void MainWindow::on_chooseFileButton_clicked()
     }
     else
     {
-        book = new Book(path);
+        book->SetPathToBookFile(path);
+        book->SetCurrentPageNumber(1);
         book->ParseBookFile();
         ConfigureBookTab();
         SetBookLabelText(book->GetBookText(), 1);

@@ -3,8 +3,10 @@
 
 #include "../include/Book.h"
 
-Book::Book(QString pathToBookFile) : pathToBookFile(pathToBookFile), currentPageNumber(1)
-{ }
+void Book::SetPathToBookFile(QString _pathToBookFile)
+{
+    pathToBookFile = _pathToBookFile;
+}
 
 void Book::ParseBookFile()
 {

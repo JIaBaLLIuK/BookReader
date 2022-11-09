@@ -7,15 +7,17 @@
 class Book
 {
 public:
-    Book(QString);
+    Book() = default;
     ~Book() = default;
+    void SetPathToBookFile(QString);
     void ParseBookFile();
     QList<QString> GetBookText() const;
     void SetTitleStyle(QXmlStreamReader&);
     void SetParagraphStyle(QString);
     int GetTotalPagesNumber() const;
-    int GetCurrentPageNumber() const;
     void SetCurrentPageNumber(int);
+    int GetCurrentPageNumber() const;
+
     int GetMaxStringAmount() const;
 
 private:
