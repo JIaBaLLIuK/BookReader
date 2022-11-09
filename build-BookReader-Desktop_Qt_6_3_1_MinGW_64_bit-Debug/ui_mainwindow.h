@@ -42,6 +42,7 @@ public:
     QWidget *aboutTab;
     QLabel *aboutProgramLabel;
     QPushButton *chooseFileButton;
+    QPushButton *chooseRecentOpenedFileButton;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -61,10 +62,10 @@ public:
         imageLabel->setScaledContents(false);
         toStartMenuButton = new QPushButton(centralwidget);
         toStartMenuButton->setObjectName(QString::fromUtf8("toStartMenuButton"));
-        toStartMenuButton->setGeometry(QRect(120, 270, 140, 30));
+        toStartMenuButton->setGeometry(QRect(100, 270, 190, 30));
         aboutProgramButton = new QPushButton(centralwidget);
         aboutProgramButton->setObjectName(QString::fromUtf8("aboutProgramButton"));
-        aboutProgramButton->setGeometry(QRect(120, 350, 140, 30));
+        aboutProgramButton->setGeometry(QRect(100, 390, 190, 30));
         programTab = new QTabWidget(centralwidget);
         programTab->setObjectName(QString::fromUtf8("programTab"));
         programTab->setGeometry(QRect(400, 0, 950, 790));
@@ -120,7 +121,10 @@ public:
         programTab->addTab(aboutTab, QString());
         chooseFileButton = new QPushButton(centralwidget);
         chooseFileButton->setObjectName(QString::fromUtf8("chooseFileButton"));
-        chooseFileButton->setGeometry(QRect(120, 310, 140, 30));
+        chooseFileButton->setGeometry(QRect(100, 310, 190, 30));
+        chooseRecentOpenedFileButton = new QPushButton(centralwidget);
+        chooseRecentOpenedFileButton->setObjectName(QString::fromUtf8("chooseRecentOpenedFileButton"));
+        chooseRecentOpenedFileButton->setGeometry(QRect(100, 350, 190, 30));
         MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(MainWindow);
@@ -150,6 +154,7 @@ public:
         aboutProgramLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         programTab->setTabText(programTab->indexOf(aboutTab), QCoreApplication::translate("MainWindow", "about", nullptr));
         chooseFileButton->setText(QCoreApplication::translate("MainWindow", "\320\222\321\213\320\261\321\200\320\260\321\202\321\214 \321\204\320\260\320\271\320\273", nullptr));
+        chooseRecentOpenedFileButton->setText(QCoreApplication::translate("MainWindow", "\320\222\321\213\320\261\321\200\320\260\321\202\321\214 \321\200\320\260\320\275\320\265\320\265 \320\276\321\202\320\272\321\200\321\213\321\202\321\213\320\271 \321\204\320\260\320\271\320\273", nullptr));
     } // retranslateUi
 
 };

@@ -41,7 +41,7 @@ void Book::SetBookText(QXmlStreamReader& xmlFile)
     QString tag;
     while (tag != "body")
     {
-        QString readedText;
+        QString readText;
         xmlFile.readNextStartElement();
         tag = xmlFile.name().toString();
         if (xmlFile.isEndElement())
@@ -90,7 +90,6 @@ void Book::SetTitleStyle(QXmlStreamReader& xmlFile)
     QString tag;
     while (tag != "title")
     {
-        QString readedText;
         xmlFile.readNextStartElement();
         tag = xmlFile.name().toString();
         if (xmlFile.isEndElement())

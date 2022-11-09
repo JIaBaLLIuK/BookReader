@@ -39,9 +39,9 @@
    <widget class="QPushButton" name="toStartMenuButton">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>100</x>
       <y>270</y>
-      <width>140</width>
+      <width>190</width>
       <height>30</height>
      </rect>
     </property>
@@ -52,9 +52,9 @@
    <widget class="QPushButton" name="aboutProgramButton">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>350</y>
-      <width>140</width>
+      <x>100</x>
+      <y>390</y>
+      <width>190</width>
       <height>30</height>
      </rect>
     </property>
@@ -244,14 +244,27 @@
    <widget class="QPushButton" name="chooseFileButton">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>100</x>
       <y>310</y>
-      <width>140</width>
+      <width>190</width>
       <height>30</height>
      </rect>
     </property>
     <property name="text">
      <string>Выбрать файл</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="chooseRecentOpenedFileButton">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>350</y>
+      <width>190</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Выбрать ранее открытый файл</string>
     </property>
    </widget>
   </widget>

@@ -11,16 +11,19 @@ CONFIG += c++17
 SOURCES += \
     src/Book.cpp \
     src/MainWindow.cpp \
+    src/RecentOpenedFilesWindow.cpp \
     src/WidgetStyle.cpp \
     src/main.cpp
 
 HEADERS += \
     include/Book.h \
     include/MainWindow.h \
+    include/RecentOpenedFilesWindow.h \
     include/WidgetStyle.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    recentopenedfileswindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -12,7 +12,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget* parent = nullptr);
+    explicit MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
 private slots:
@@ -22,6 +22,7 @@ private slots:
     void on_nextPageButton_clicked();
     void on_previousPageButton_clicked();
     void on_findPageButton_clicked();
+    void on_chooseRecentOpenedFileButton_clicked();
 
 private:
     void ConfigureMainWindow();

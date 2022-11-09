@@ -2,6 +2,7 @@
 #include <QMessageBox>
 
 #include "../include/MainWindow.h"
+#include "../include/RecentOpenedFilesWindow.h"
 #include "../include/WidgetStyle.h"
 #include "ui_mainwindow.h"
 
@@ -89,6 +90,13 @@ void MainWindow::on_findPageButton_clicked()
     ui->currentPageNumberLabel->setText(QString::number(page));
     book->SetCurrentPageNumber(page);
     SetBookLabelText(book->GetBookText(), page);
+}
+
+void MainWindow::on_chooseRecentOpenedFileButton_clicked()
+{
+    RecentOpenedFilesWindow window;
+
+    window.exec();
 }
 
 void MainWindow::ConfigureMainWindow()
