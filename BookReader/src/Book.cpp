@@ -151,6 +151,11 @@ void Book::SetParagraphStyle(QString paragraphText)
     bookText.append("<p style = \"margin: 0\">" + paragraphText + "</p>");
 }
 
+void Book::ResetBookText()
+{
+    bookText.clear();
+}
+
 int Book::GetTotalPagesNumber() const
 {
     return totalPagesNumber;

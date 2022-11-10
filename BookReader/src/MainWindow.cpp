@@ -1,5 +1,6 @@
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QFile>
 
 #include "../include/MainWindow.h"
 #include "../include/RecentOpenedFilesWindow.h"
@@ -41,10 +42,32 @@ void MainWindow::on_chooseFileButton_clicked()
     else
     {
         book->SetPathToBookFile(path);
-        book->SetCurrentPageNumber(1);
+        book->ResetBookText();
         book->ParseBookFile();
         ConfigureBookTab();
         SetBookLabelText(book->GetBookText(), 1);
+        book->SetCurrentPageNumber(1);
+
+        QFile recentOpenedFiles("RecentOpenedFiles.txt");
+        recentOpenedFiles.open(QIODevice::ReadOnly | QIODevice::Text);
+        QString line;
+
+        while (!recentOpenedFiles.atEnd())
+        {
+            line = recentOpenedFiles.readLine();
+            if (line.contains(path))
+            {
+                return;
+            }
+        }
+
+        recentOpenedFiles.close();
+
+        recentOpenedFiles.open(QIODevice::Append | QIODevice::Text);
+        QTextStream stream(&recentOpenedFiles);
+        stream << path << " " << '\n';
+        recentOpenedFiles.flush();
+        recentOpenedFiles.close();
     }
 }
 

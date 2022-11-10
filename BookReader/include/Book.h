@@ -14,10 +14,10 @@ public:
     QList<QString> GetBookText() const;
     void SetTitleStyle(QXmlStreamReader&);
     void SetParagraphStyle(QString);
+    void ResetBookText();
     int GetTotalPagesNumber() const;
     void SetCurrentPageNumber(int);
     int GetCurrentPageNumber() const;
-
     int GetMaxStringAmount() const;
 
 private:
