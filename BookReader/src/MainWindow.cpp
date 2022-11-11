@@ -48,26 +48,11 @@ void MainWindow::on_chooseFileButton_clicked()
         SetBookLabelText(book->GetBookText(), 1);
         book->SetCurrentPageNumber(1);
 
-        QFile recentOpenedFiles("RecentOpenedFiles.txt");
-        recentOpenedFiles.open(QIODevice::ReadOnly | QIODevice::Text);
-        QString line;
-
-        while (!recentOpenedFiles.atEnd())
+        QString bookFileName = (QFileInfo(QFile(path).fileName())).fileName();
+        if (!QFile::exists("RecentOpenedFiles/" + bookFileName))
         {
-            line = recentOpenedFiles.readLine();
-            if (line.contains(path))
-            {
-                return;
-            }
+            QFile::copy(path, "RecentOpenedFiles/" + bookFileName);
         }
-
-        recentOpenedFiles.close();
-
-        recentOpenedFiles.open(QIODevice::Append | QIODevice::Text);
-        QTextStream stream(&recentOpenedFiles);
-        stream << path << " " << '\n';
-        recentOpenedFiles.flush();
-        recentOpenedFiles.close();
     }
 }
 
