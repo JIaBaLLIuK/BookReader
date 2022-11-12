@@ -8,6 +8,11 @@ void Book::SetPathToBookFile(QString _pathToBookFile)
     pathToBookFile = _pathToBookFile;
 }
 
+QString Book::GetPathToBookFile() const
+{
+    return pathToBookFile;
+}
+
 void Book::ParseBookFile()
 {
     QFile bookFile(pathToBookFile);

@@ -44,15 +44,18 @@ void MainWindow::on_chooseFileButton_clicked()
         book->SetPathToBookFile(path);
         book->ResetBookText();
         book->ParseBookFile();
+        book->SetCurrentPageNumber(1);
         ConfigureBookTab();
         SetBookLabelText(book->GetBookText(), 1);
-        book->SetCurrentPageNumber(1);
+
 
         QString bookFileName = (QFileInfo(QFile(path).fileName())).fileName();
         if (!QFile::exists("RecentOpenedFiles/" + bookFileName))
         {
             QFile::copy(path, "RecentOpenedFiles/" + bookFileName);
         }
+
+       AppendPageNumberToBookFile(book->GetCurrentPageNumber());
     }
 }
 
@@ -68,6 +71,7 @@ void MainWindow::on_nextPageButton_clicked()
     book->SetCurrentPageNumber(currentPageNumber);
     ui->currentPageNumberLabel->setText(QString::number(currentPageNumber));
     SetBookLabelText(book->GetBookText(), currentPageNumber);
+    AppendPageNumberToBookFile(book->GetCurrentPageNumber());
 }
 
 void MainWindow::on_previousPageButton_clicked()
@@ -82,12 +86,13 @@ void MainWindow::on_previousPageButton_clicked()
     book->SetCurrentPageNumber(currentPageNumber);
     ui->currentPageNumberLabel->setText(QString::number(currentPageNumber));
     SetBookLabelText(book->GetBookText(), currentPageNumber);
+    AppendPageNumberToBookFile(book->GetCurrentPageNumber());
 }
 
 void MainWindow::on_findPageButton_clicked()
 {
-    int page = ui->findPageLineEdit->text().toInt();
-    if (page < 1 || page > book->GetTotalPagesNumber())
+    int pageNumber = ui->findPageLineEdit->text().toInt();
+    if (pageNumber < 1 || pageNumber > book->GetTotalPagesNumber())
     {
         QMessageBox::warning(this, "", "Вы ввели неверное значение!");
         ui->findPageLineEdit->setText("");
@@ -95,9 +100,10 @@ void MainWindow::on_findPageButton_clicked()
     }
 
     ui->findPageLineEdit->setText("");
-    ui->currentPageNumberLabel->setText(QString::number(page));
-    book->SetCurrentPageNumber(page);
-    SetBookLabelText(book->GetBookText(), page);
+    ui->currentPageNumberLabel->setText(QString::number(pageNumber));
+    book->SetCurrentPageNumber(pageNumber);
+    SetBookLabelText(book->GetBookText(), pageNumber);
+    AppendPageNumberToBookFile(pageNumber);
 }
 
 void MainWindow::on_chooseRecentOpenedFileButton_clicked()
@@ -178,4 +184,13 @@ void MainWindow::SetBookLabelText(QList<QString> bookText, int currentPageNumber
     }
 
     ui->bookLabel->setText(pageText);
+}
+
+void MainWindow::AppendPageNumberToBookFile(int pageNumber)
+{
+    QString bookFileName = (QFileInfo(QFile(book->GetPathToBookFile()).fileName())).fileName();
+    QFile bookFile("RecentOpenedFiles/" + bookFileName);
+    bookFile.open(QIODevice::Text | QIODevice::Append);
+    QTextStream bookFileStream(&bookFile);
+    bookFileStream << '\n' << pageNumber;
 }

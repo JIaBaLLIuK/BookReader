@@ -10,6 +10,7 @@ public:
     Book() = default;
     ~Book() = default;
     void SetPathToBookFile(QString);
+    QString GetPathToBookFile() const;
     void ParseBookFile();
     QList<QString> GetBookText() const;
     void SetTitleStyle(QXmlStreamReader&);

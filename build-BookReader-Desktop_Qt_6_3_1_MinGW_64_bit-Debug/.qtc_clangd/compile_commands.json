@@ -634,10 +634,10 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "E:\\Projects\\BSUIR\\Course Works\\BookReader\\build-BookReader-Desktop_Qt_6_3_1_MinGW_64_bit-Debug\\ui_recentopenedfileswindow.h"
+        "E:\\Projects\\BSUIR\\Course Works\\BookReader\\build-BookReader-Desktop_Qt_6_3_1_MinGW_64_bit-Debug\\ui_mainwindow.h"
     ],
     "directory": "E:/Projects/BSUIR/Course Works/BookReader/build-BookReader-Desktop_Qt_6_3_1_MinGW_64_bit-Debug/.qtc_clangd",
-    "file": "E:/Projects/BSUIR/Course Works/BookReader/build-BookReader-Desktop_Qt_6_3_1_MinGW_64_bit-Debug/ui_recentopenedfileswindow.h"
+    "file": "E:/Projects/BSUIR/Course Works/BookReader/build-BookReader-Desktop_Qt_6_3_1_MinGW_64_bit-Debug/ui_mainwindow.h"
 },
 {
     "arguments": [
@@ -698,9 +698,9 @@
         "-ferror-limit=1000",
         "-x",
         "c++-header",
-        "E:\\Projects\\BSUIR\\Course Works\\BookReader\\build-BookReader-Desktop_Qt_6_3_1_MinGW_64_bit-Debug\\ui_mainwindow.h"
+        "E:\\Projects\\BSUIR\\Course Works\\BookReader\\build-BookReader-Desktop_Qt_6_3_1_MinGW_64_bit-Debug\\ui_recentopenedfileswindow.h"
     ],
     "directory": "E:/Projects/BSUIR/Course Works/BookReader/build-BookReader-Desktop_Qt_6_3_1_MinGW_64_bit-Debug/.qtc_clangd",
-    "file": "E:/Projects/BSUIR/Course Works/BookReader/build-BookReader-Desktop_Qt_6_3_1_MinGW_64_bit-Debug/ui_mainwindow.h"
+    "file": "E:/Projects/BSUIR/Course Works/BookReader/build-BookReader-Desktop_Qt_6_3_1_MinGW_64_bit-Debug/ui_recentopenedfileswindow.h"
 }
 ]

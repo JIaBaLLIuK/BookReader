@@ -32,7 +32,7 @@ private:
     void ConfigureBookTab();
     void ConfigurePageButtons();
     void SetBookLabelText(QList<QString>, int);
-    void FindPage();
+    void AppendPageNumberToBookFile(int);
 
     Ui::MainWindow* ui;
     Book* book;
