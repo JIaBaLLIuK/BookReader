@@ -1,5 +1,5 @@
-#ifndef RECENTOPENEDFILESWINDOW_H
-#define RECENTOPENEDFILESWINDOW_H
+#ifndef RECENT_OPENED_FILES_WINDOW_H
+#define RECENT_OPENED_FILES_WINDOW_H
 
 #include <QDialog>
 #include <QPushButton>
@@ -37,4 +37,4 @@ private:
     QString bookFileName;
 };
 
-#endif // RECENTOPENEDFILESWINDOW_H
+#endif

@@ -33,4 +33,4 @@ private:
     int currentPageNumber;
 };
 
-#endif // BOOK_H
+#endif

@@ -40,4 +40,4 @@ private:
     const int WINDOW_HEIGHT = 800;
 };
 
-#endif // MAIN_WINDOW_H
+#endif

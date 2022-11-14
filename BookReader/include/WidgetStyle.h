@@ -15,4 +15,4 @@ public:
     static QString GetFindPageLineEditStyle();
 };
 
-#endif // WIDGET_STYLE_H
+#endif

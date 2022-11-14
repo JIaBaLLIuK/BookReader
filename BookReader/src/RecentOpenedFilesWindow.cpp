@@ -22,7 +22,6 @@ RecentOpenedFilesWindow::~RecentOpenedFilesWindow()
 void RecentOpenedFilesWindow::RecentOpenedFileButtonClicked()
 {
     QPushButton* btn = (QPushButton*)sender();
-    bookFileName = btn->text();
     SetLastOpenedPageNumber(btn->text());
 }
 
