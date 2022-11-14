@@ -120,6 +120,7 @@ release/qrc_resources.cpp: ../BookReader/resources.qrc \
 		E:/Qt/6.3.1/mingw_64/bin/rcc.exe \
 		../BookReader/img/magnifier_icon.png \
 		../BookReader/img/program_icon.png \
+		../BookReader/img/delete_file_icon.png \
 		../BookReader/img/book_image.jpg
 	E:\Qt\6.3.1\mingw_64\bin\rcc.exe -name resources ..\BookReader\resources.qrc -o release\qrc_resources.cpp
 
@@ -726,6 +727,7 @@ release/MainWindow.o: ../BookReader/src/MainWindow.cpp E:/Qt/6.3.1/mingw_64/incl
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qnativeinterface.h \
 		E:/Qt/6.3.1/mingw_64/include/QtWidgets/QMessageBox \
 		E:/Qt/6.3.1/mingw_64/include/QtWidgets/qmessagebox.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/QFile \
 		../BookReader/include/MainWindow.h \
 		E:/Qt/6.3.1/mingw_64/include/QtWidgets/QMainWindow \
 		E:/Qt/6.3.1/mingw_64/include/QtWidgets/qmainwindow.h \
@@ -734,6 +736,8 @@ release/MainWindow.o: ../BookReader/src/MainWindow.cpp E:/Qt/6.3.1/mingw_64/incl
 		E:/Qt/6.3.1/mingw_64/include/QtCore/QString \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/QXmlStreamReader \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qxmlstream.h \
+		../BookReader/include/RecentOpenedFilesWindow.h \
+		E:/Qt/6.3.1/mingw_64/include/QtWidgets/QDialog \
 		../BookReader/include/WidgetStyle.h \
 		ui_mainwindow.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/QVariant \
@@ -775,11 +779,10 @@ release/MainWindow.o: ../BookReader/src/MainWindow.cpp E:/Qt/6.3.1/mingw_64/incl
 		E:/Qt/6.3.1/mingw_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\MainWindow.o ..\BookReader\src\MainWindow.cpp
 
-release/RecentOpenedFilesWindow.o: ../BookReader/src/RecentOpenedFilesWindow.cpp ../BookReader/include/RecentOpenedFilesWindow.h \
-		E:/Qt/6.3.1/mingw_64/include/QtWidgets/QDialog \
-		E:/Qt/6.3.1/mingw_64/include/QtWidgets/qdialog.h \
-		E:/Qt/6.3.1/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
-		E:/Qt/6.3.1/mingw_64/include/QtGui/qtguiglobal.h \
+release/RecentOpenedFilesWindow.o: ../BookReader/src/RecentOpenedFilesWindow.cpp E:/Qt/6.3.1/mingw_64/include/QtCore/QDir \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qdir.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qstring.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qchar.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qglobal.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qconfig-bootstrapped.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qconfig.h \
@@ -802,23 +805,11 @@ release/RecentOpenedFilesWindow.o: ../BookReader/src/RecentOpenedFilesWindow.cpp
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qglobalstatic.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qnumeric.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qversiontagging.h \
-		E:/Qt/6.3.1/mingw_64/include/QtGui/qtgui-config.h \
-		E:/Qt/6.3.1/mingw_64/include/QtGui/qtguiexports.h \
-		E:/Qt/6.3.1/mingw_64/include/QtWidgets/qtwidgets-config.h \
-		E:/Qt/6.3.1/mingw_64/include/QtWidgets/qtwidgetsexports.h \
-		E:/Qt/6.3.1/mingw_64/include/QtWidgets/qwidget.h \
-		E:/Qt/6.3.1/mingw_64/include/QtGui/qwindowdefs.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qobjectdefs.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qnamespace.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qtmetamacros.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qobjectdefs_impl.h \
-		E:/Qt/6.3.1/mingw_64/include/QtGui/qwindowdefs_win.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qobject.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qstring.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qchar.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qstringview.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qbytearray.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qrefcount.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qnamespace.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qtmetamacros.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qarraydata.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qpair.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qarraydatapointer.h \
@@ -832,6 +823,13 @@ release/RecentOpenedFilesWindow.o: ../BookReader/src/RecentOpenedFilesWindow.cpp
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qutf8stringview.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qstringtokenizer.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qstringbuilder.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qfile.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qfiledevice.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qiodevice.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qiodevicebase.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qobject.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qobjectdefs.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qobjectdefs_impl.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qlist.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qhashfunctions.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qiterator.h \
@@ -846,7 +844,6 @@ release/RecentOpenedFilesWindow.o: ../BookReader/src/RecentOpenedFilesWindow.cpp
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qvarlengtharray.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qscopeguard.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qdatastream.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qiodevicebase.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qiterable.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qmetacontainer.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qcontainerinfo.h \
@@ -854,6 +851,34 @@ release/RecentOpenedFilesWindow.o: ../BookReader/src/RecentOpenedFilesWindow.cpp
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qmath.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qobject_impl.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qbindingstorage.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qfileinfo.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qshareddata.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qdatetime.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qcalendar.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qlocale.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qvariant.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qmap.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qshareddata_impl.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qhash.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qdebug.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qtextstream.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qstringconverter.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qset.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qcontiguouscache.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qsharedpointer.h \
+		E:/Qt/6.3.1/mingw_64/include/QtCore/qsharedpointer_impl.h \
+		../BookReader/include/RecentOpenedFilesWindow.h \
+		E:/Qt/6.3.1/mingw_64/include/QtWidgets/QDialog \
+		E:/Qt/6.3.1/mingw_64/include/QtWidgets/qdialog.h \
+		E:/Qt/6.3.1/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
+		E:/Qt/6.3.1/mingw_64/include/QtGui/qtguiglobal.h \
+		E:/Qt/6.3.1/mingw_64/include/QtGui/qtgui-config.h \
+		E:/Qt/6.3.1/mingw_64/include/QtGui/qtguiexports.h \
+		E:/Qt/6.3.1/mingw_64/include/QtWidgets/qtwidgets-config.h \
+		E:/Qt/6.3.1/mingw_64/include/QtWidgets/qtwidgetsexports.h \
+		E:/Qt/6.3.1/mingw_64/include/QtWidgets/qwidget.h \
+		E:/Qt/6.3.1/mingw_64/include/QtGui/qwindowdefs.h \
+		E:/Qt/6.3.1/mingw_64/include/QtGui/qwindowdefs_win.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qmargins.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qaction.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qkeysequence.h \
@@ -866,24 +891,12 @@ release/RecentOpenedFilesWindow.o: ../BookReader/src/RecentOpenedFilesWindow.cpp
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qcolor.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qrgb.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qrgba64.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qsharedpointer.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qshareddata.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qsharedpointer_impl.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qimage.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qpixelformat.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qtransform.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qpolygon.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qregion.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qline.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qvariant.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qmap.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qshareddata_impl.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qhash.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qdebug.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qtextstream.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qstringconverter.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qset.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qcontiguouscache.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qpalette.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qbrush.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qfont.h \
@@ -893,7 +906,6 @@ release/RecentOpenedFilesWindow.o: ../BookReader/src/RecentOpenedFilesWindow.cpp
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qcursor.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qbitmap.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qevent.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qiodevice.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qpointer.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qurl.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qeventpoint.h \
@@ -909,6 +921,9 @@ release/RecentOpenedFilesWindow.o: ../BookReader/src/RecentOpenedFilesWindow.cpp
 		E:/Qt/6.3.1/mingw_64/include/QtCore/QSizeF \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/QTransform \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qnativeinterface.h \
+		E:/Qt/6.3.1/mingw_64/include/QtWidgets/QPushButton \
+		E:/Qt/6.3.1/mingw_64/include/QtWidgets/qpushbutton.h \
+		E:/Qt/6.3.1/mingw_64/include/QtWidgets/qabstractbutton.h \
 		ui_recentopenedfileswindow.h \
 		E:/Qt/6.3.1/mingw_64/include/QtCore/QVariant \
 		E:/Qt/6.3.1/mingw_64/include/QtWidgets/QApplication \
@@ -930,7 +945,6 @@ release/RecentOpenedFilesWindow.o: ../BookReader/src/RecentOpenedFilesWindow.cpp
 		E:/Qt/6.3.1/mingw_64/include/QtCore/qpromise.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qguiapplication.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qinputmethod.h \
-		E:/Qt/6.3.1/mingw_64/include/QtCore/qlocale.h \
 		E:/Qt/6.3.1/mingw_64/include/QtGui/qguiapplication_platform.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\RecentOpenedFilesWindow.o ..\BookReader\src\RecentOpenedFilesWindow.cpp
 

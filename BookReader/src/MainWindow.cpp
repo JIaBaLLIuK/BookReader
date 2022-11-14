@@ -48,7 +48,6 @@ void MainWindow::on_chooseFileButton_clicked()
         ConfigureBookTab();
         SetBookLabelText(book->GetBookText(), 1);
 
-
         QString bookFileName = (QFileInfo(QFile(path).fileName())).fileName();
         if (!QFile::exists("RecentOpenedFiles/" + bookFileName))
         {
@@ -108,16 +107,30 @@ void MainWindow::on_findPageButton_clicked()
 
 void MainWindow::on_chooseRecentOpenedFileButton_clicked()
 {
-    RecentOpenedFilesWindow window;
-
+    RecentOpenedFilesWindow window(this);
+    window.show();
     window.exec();
+    QString bookFileName = window.GetBookFileName();
+    if (bookFileName.isEmpty())
+    {
+        QMessageBox::warning(this, "", "Вы не выбрали файл!");
+        return;
+    }
+
+    book->SetPathToBookFile("RecentOpenedFiles/" + bookFileName);
+    book->ResetBookText();
+    book->ParseBookFile();
+    int lastOpenedPageNumber = window.GetLastOpenedPageNumber();
+    book->SetCurrentPageNumber(lastOpenedPageNumber);
+    ConfigureBookTab();
+    SetBookLabelText(book->GetBookText(), lastOpenedPageNumber);
 }
 
 void MainWindow::ConfigureMainWindow()
 {
-    this->setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-    this->setWindowTitle("Book Reader");
-    this->setWindowIcon(QIcon(":/img/program_icon.png"));
+    setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+    setWindowTitle("Book Reader");
+    setWindowIcon(QIcon(":/img/program_icon.png"));
     QPixmap labelPicture(":/img/book_image.jpg");
     labelPicture = labelPicture.scaled(labelPicture.width() * 0.8f, labelPicture.height() * 0.8f);
     ui->imageLabel->setFixedSize(labelPicture.size());

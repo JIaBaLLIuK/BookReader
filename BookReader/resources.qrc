@@ -3,5 +3,6 @@
         <file>img/program_icon.png</file>
         <file>img/book_image.jpg</file>
         <file>img/magnifier_icon.png</file>
+        <file>img/delete_file_icon.png</file>
     </qresource>
 </RCC>

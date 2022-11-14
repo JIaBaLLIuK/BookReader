@@ -16,9 +16,10 @@ QString Book::GetPathToBookFile() const
 void Book::ParseBookFile()
 {
     QFile bookFile(pathToBookFile);
-    if (!bookFile.open(QFile::ReadOnly | QFile::Text))
+    if (!bookFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        QMessageBox::critical(nullptr, "Критическая ошибка!", "Что-то пошло не так. Файл невозможно открыть!");
+        QMessageBox::critical(nullptr, "", "Что-то пошло не так. Файл невозможно открыть!");
+        return;
     }
 
     QXmlStreamReader xmlFile(&bookFile);
