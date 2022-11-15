@@ -21,10 +21,11 @@ private slots:
     void DeleteRecentOpenedFileButtonClicked();
 
 private:
+    void ConfigureDialogWindow();
     void SetRecentOpenedFiles();
-    void CreateRecentOpenedFilesButtons();
-    void CreateDeleteRecentOpenedFilesButtons();
     void SetLastOpenedPageNumber(QString);
+    void CreateRecentOpenedFilesButtons();
+    void CreateDeleteRecentOpenedFilesButtons();    
     void ChangeRecentOpenedFilesButtonsPosition(int);
 
     Ui::RecentOpenedFilesWindow *ui;

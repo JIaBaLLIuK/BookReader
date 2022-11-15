@@ -1,15 +1,14 @@
 #include <QDir>
 
 #include "../include/RecentOpenedFilesWindow.h"
+#include "../include/WidgetStyle.h"
 #include "ui_recentopenedfileswindow.h"
 
 RecentOpenedFilesWindow::RecentOpenedFilesWindow(QWidget* parent) : QDialog(parent), ui(new Ui::RecentOpenedFilesWindow)
 {
     ui->setupUi(this);
+    ConfigureDialogWindow();
 
-    setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-    setWindowTitle("Выберите файл");
-    setWindowIcon(QIcon(":/img/program_icon.png"));
 
     SetRecentOpenedFiles();
     CreateRecentOpenedFilesButtons();
@@ -42,6 +41,14 @@ void RecentOpenedFilesWindow::DeleteRecentOpenedFileButtonClicked()
     }
 }
 
+void RecentOpenedFilesWindow::ConfigureDialogWindow()
+{
+    setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+    setWindowTitle("Выберите файл");
+    setWindowIcon(QIcon(":/img/program_icon.png"));
+    setWindowModality(Qt::ApplicationModal);
+}
+
 void RecentOpenedFilesWindow::SetRecentOpenedFiles()
 {
     QDir recentOpenedFilesDirectory("RecentOpenedFiles/");
@@ -58,8 +65,10 @@ void RecentOpenedFilesWindow::CreateRecentOpenedFilesButtons()
         recentOpenedFilesButtons[i]->setText(recentOpenedFiles[i]);  // текст кнопки - текст книги
         recentOpenedFilesButtons[i]->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);  // установить размеры кнопки
         recentOpenedFilesButtons[i]->move(0, i * BUTTON_HEIGHT);  // задать координаты кнопки
-        connect(recentOpenedFilesButtons[i], SIGNAL(clicked()), this, SLOT(RecentOpenedFileButtonClicked()));  // обработка нажатия кнопки
-        connect(recentOpenedFilesButtons[i], SIGNAL(clicked()), this, SLOT(close()));  // закрытие диалогового окна при выборе файла
+        recentOpenedFilesButtons[i]->setStyleSheet(WidgetStyle::GetRecentOpenedFilesButtonsStyle());  // установка стилей для кнопки
+        // обработка нажатия кнопки
+        connect(recentOpenedFilesButtons[i], SIGNAL(clicked()), this, SLOT(RecentOpenedFileButtonClicked()));
+        connect(recentOpenedFilesButtons[i], SIGNAL(clicked()), this, SLOT(close()));
     }
 }
 
@@ -72,12 +81,13 @@ void RecentOpenedFilesWindow::CreateDeleteRecentOpenedFilesButtons()
         deleteRecentOpenedFilesButtons.append(new QPushButton(this));  // добавление кнопки в список
         deleteRecentOpenedFilesButtons[i]->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);  // установить размеры кнопки
         deleteRecentOpenedFilesButtons[i]->move(WINDOW_WIDTH - 50, i * BUTTON_HEIGHT);  // задать координаты кнопки
-
+        deleteRecentOpenedFilesButtons[i]->setStyleSheet(WidgetStyle::GetDeleteRecentOpenedFilesButtonsStyle());  // установка стилей для кнопки
+        // создание иконки кнопки
         QIcon deleteRecentOpenedFileButtonIcon(":/img/delete_file_icon.png");
-        deleteRecentOpenedFilesButtons[i]->setIcon(deleteRecentOpenedFileButtonIcon);  // задать картинку для кнопки
+        deleteRecentOpenedFilesButtons[i]->setIcon(deleteRecentOpenedFileButtonIcon);
         deleteRecentOpenedFilesButtons[i]->setIconSize(deleteRecentOpenedFilesButtons[i]->size());
-
-        connect(deleteRecentOpenedFilesButtons[i], SIGNAL(clicked()), this, SLOT(DeleteRecentOpenedFileButtonClicked()));  // обработка нажатия кнопки
+        // обработка нажатия кнопки
+        connect(deleteRecentOpenedFilesButtons[i], SIGNAL(clicked()), this, SLOT(DeleteRecentOpenedFileButtonClicked()));
     }
 }
 
