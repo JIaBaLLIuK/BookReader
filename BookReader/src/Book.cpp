@@ -16,7 +16,7 @@ QString Book::GetPathToBookFile() const
 void Book::ParseBookFile()
 {
     QFile bookFile(pathToBookFile);
-    if (!bookFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    if (!bookFile.open(QIODevice::ReadOnly | QIODevice::Text))  // попытка открыть файл
     {
         QMessageBox::critical(nullptr, "", "Что-то пошло не так. Файл невозможно открыть!");
         return;
@@ -26,7 +26,7 @@ void Book::ParseBookFile()
     while (!xmlFile.atEnd())
     {
         xmlFile.readNextStartElement();
-        if (xmlFile.isEndElement())
+        if (xmlFile.isEndElement())  // перейти на следующую итерацию, если следующий считанный элемент является закрывающим тегом
         {
             continue;
         }
@@ -34,7 +34,7 @@ void Book::ParseBookFile()
         QString tag = xmlFile.name().toString();
         if (tag == "body")
         {
-            SetBookText(xmlFile);
+            SetBookText(xmlFile);  // если найден тег "body" задать текст книги
             break;
         }
     }
@@ -45,17 +45,16 @@ void Book::ParseBookFile()
 void Book::SetBookText(QXmlStreamReader& xmlFile)
 {
     QString tag;
-    while (tag != "body")
+    while (tag != "body")  // цикл до тех пор, пока не найден конец тега "body"
     {
-        QString readText;
-        xmlFile.readNextStartElement();
-        tag = xmlFile.name().toString();
-        if (xmlFile.isEndElement())
+        xmlFile.readNextStartElement();  // считать следующий тег
+        tag = xmlFile.name().toString();  // считанный тег
+        if (xmlFile.isEndElement())  // перейти на следующую итерацию, если следующий считанный элемент является закрывающим тегом
         {
             continue;
         }
 
-        while (tag != "p" && tag != "title")
+        while (tag != "p" && tag != "title")  // цикл до тех пор, пока не найден тег "P" (абзац) или тег "title" (заголовок)
         {
             xmlFile.readNextStartElement();
             tag = xmlFile.name().toString();
@@ -63,19 +62,19 @@ void Book::SetBookText(QXmlStreamReader& xmlFile)
 
         if (tag == "p")
         {
-            SetParagraphStyle(xmlFile.readElementText(QXmlStreamReader::ReadElementTextBehaviour::IncludeChildElements));
+            SetParagraphStyle(xmlFile.readElementText(QXmlStreamReader::ReadElementTextBehaviour::IncludeChildElements));  // если тег "p" - задать стиль текста абзаца
         }
         else
         {
-             SetTitleStyle(xmlFile);
+             SetTitleStyle(xmlFile);  // иначе задать стиль текста заголовка
         }
     }
 
-    SetTotalPagesNumber();
+    SetTotalPagesNumber();  // установить общее число страниц книги
 }
 
 void Book::SetTotalPagesNumber()
-{
+{   // метод установки общего числа страниц книги
     if (bookText.size() % MAX_STRING_AMOUNT == 0)
     {
         totalPagesNumber = bookText.size() / MAX_STRING_AMOUNT;
@@ -94,21 +93,21 @@ QList<QString> Book::GetBookText() const
 void Book::SetTitleStyle(QXmlStreamReader& xmlFile)
 {
     QString tag;
-    while (tag != "title")
+    while (tag != "title")  // цикл до тех пор, пока не найден конец тега "title"
     {
         xmlFile.readNextStartElement();
         tag = xmlFile.name().toString();
-        if (xmlFile.isEndElement())
+        if (xmlFile.isEndElement())  // перейти на следующую итерацию, если следующий считанный элемент является закрывающим тегом
         {
             continue;
         }
 
-        while (tag != "p")
+        while (tag != "p")  // цикл до тех пор, пока не найден текста тега "title"
         {
             xmlFile.readNextStartElement();
             tag = xmlFile.name().toString();
         }
-
+        // задать элементу тега "title" жирный шрифт, выравненный по центру
         bookText.append("<p align = 'center'><b>" +
                         xmlFile.readElementText(QXmlStreamReader::ReadElementTextBehaviour::IncludeChildElements) +
                         "</p></b>");
@@ -117,16 +116,16 @@ void Book::SetTitleStyle(QXmlStreamReader& xmlFile)
 
 void Book::SetParagraphStyle(QString paragraphText)
 {
-    if (paragraphText.length() <= MAX_STRING_LENGTH)
+    if (paragraphText.length() <= MAX_STRING_LENGTH)  // если абзац меньше, чем максимальная длина одной строки
     {
         bookText.append("<p style = \"margin-left: 30; margin-right: 0; margin-top: 0; margin-bottom: 0\">" + paragraphText + "</p>");
         return;
     }
 
     bool isFirstLineOfParagraph = true;
-    while (paragraphText.length() > MAX_STRING_LENGTH)
+    while (paragraphText.length() > MAX_STRING_LENGTH)  // пока абзац длинне, чем максимальная длина одной строки
     {
-        QString textToAppend;
+        QString textToAppend;  // текст строки абзаца
         for (int i = 0; i  < MAX_STRING_LENGTH; i++)
         {
             textToAppend.append(paragraphText[i]);
@@ -136,30 +135,30 @@ void Book::SetParagraphStyle(QString paragraphText)
         length--;
         while (textToAppend[length] != ',' && textToAppend[length] != ';' && textToAppend[length] != ':' && textToAppend[length] != '.'
                 && textToAppend[length] != '?' && textToAppend[length] != '!' && (textToAppend[length] != ' ' && paragraphText[length] != ' '))
-        {
+        {   // удалять символ строки до тех пор, пока он не равен знаку препинания, пробелу или концу слова
             textToAppend.remove(length, 1);
             length--;
         }
 
         length++;
-        paragraphText = paragraphText.remove(0, length);
+        paragraphText = paragraphText.remove(0, length);  // удалить из текста абзаца считанную строку
         if (isFirstLineOfParagraph)
-        {
+        {   // задать текст строки с отступом, если первая строка абзаца
             bookText.append("<p style = \"margin-left: 30; margin-right: 0; margin-top: 0; margin-bottom: 0\">" + textToAppend + "</p>");
             isFirstLineOfParagraph = false;
         }
         else
         {
-            bookText.append("<p style = \"margin: 0\">" + textToAppend + "</p>");
+            bookText.append("<p style = \"margin: 0\">" + textToAppend + "</p>");  // задать текст строки
         }
     }
 
-    bookText.append("<p style = \"margin: 0\">" + paragraphText + "</p>");
+    bookText.append("<p style = \"margin: 0\">" + paragraphText + "</p>");  // задать текст последней строки абзаца
 }
 
 void Book::ResetBookText()
 {
-    bookText.clear();
+    bookText.clear();  // удалить текст книги
 }
 
 int Book::GetTotalPagesNumber() const
@@ -172,9 +171,9 @@ int Book::GetCurrentPageNumber() const
     return currentPageNumber;
 }
 
-void Book::SetCurrentPageNumber(int currentPageNumber)
+void Book::SetCurrentPageNumber(int _currentPageNumber)
 {
-    this->currentPageNumber = currentPageNumber;
+    currentPageNumber = _currentPageNumber;
 }
 
 int Book::GetMaxStringAmount() const

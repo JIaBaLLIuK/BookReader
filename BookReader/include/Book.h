@@ -3,7 +3,7 @@
 
 #include <QString>
 #include <QXmlStreamReader>
-
+// класс, содержащий в себе информацию о книге
 class Book
 {
 public:
@@ -12,9 +12,7 @@ public:
     void SetPathToBookFile(QString);
     QString GetPathToBookFile() const;
     void ParseBookFile();
-    QList<QString> GetBookText() const;
-    void SetTitleStyle(QXmlStreamReader&);
-    void SetParagraphStyle(QString);
+    QList<QString> GetBookText() const;    
     void ResetBookText();
     int GetTotalPagesNumber() const;
     void SetCurrentPageNumber(int);
@@ -23,6 +21,8 @@ public:
 
 private:
     void SetBookText(QXmlStreamReader&);
+    void SetTitleStyle(QXmlStreamReader&);
+    void SetParagraphStyle(QString);
     void SetTotalPagesNumber();
 
     QString pathToBookFile;

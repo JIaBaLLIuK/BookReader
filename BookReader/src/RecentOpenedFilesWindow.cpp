@@ -6,9 +6,11 @@
 RecentOpenedFilesWindow::RecentOpenedFilesWindow(QWidget* parent) : QDialog(parent), ui(new Ui::RecentOpenedFilesWindow)
 {
     ui->setupUi(this);
+
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     setWindowTitle("Выберите файл");
     setWindowIcon(QIcon(":/img/program_icon.png"));
+
     SetRecentOpenedFiles();
     CreateRecentOpenedFilesButtons();
     CreateDeleteRecentOpenedFilesButtons();
@@ -22,18 +24,19 @@ RecentOpenedFilesWindow::~RecentOpenedFilesWindow()
 void RecentOpenedFilesWindow::RecentOpenedFileButtonClicked()
 {
     QPushButton* btn = (QPushButton*)sender();
-    SetLastOpenedPageNumber(btn->text());
+    bookFileName = btn->text();  // получить имя выбранной книги
+    SetLastOpenedPageNumber(bookFileName);  // получить последнюю страницы выбранной книги
 }
 
 void RecentOpenedFilesWindow::DeleteRecentOpenedFileButtonClicked()
 {
     QPushButton* btn = (QPushButton*)sender();
-    int deleteButtonY = btn->y();
+    int deleteButtonY = btn->y();  // получить y координату выбранной кнопки удалить (она равна y координате кнопки с книгой)
     for (int i = 0; i < recentOpenedFilesButtons.size(); i++)
     {
         if (deleteButtonY == recentOpenedFilesButtons[i]->y())
         {
-            ChangeRecentOpenedFilesButtonsPosition(i);
+            ChangeRecentOpenedFilesButtonsPosition(i);  // если найден номер кнопки с названием книги, который необходимо удалить
             break;
         }
     }
@@ -42,80 +45,76 @@ void RecentOpenedFilesWindow::DeleteRecentOpenedFileButtonClicked()
 void RecentOpenedFilesWindow::SetRecentOpenedFiles()
 {
     QDir recentOpenedFilesDirectory("RecentOpenedFiles/");
-    recentOpenedFiles = recentOpenedFilesDirectory.entryList();
-    for (int i = 0; i < 2; i++)
-    {
-        recentOpenedFiles.removeAt(0);
-    }
+    recentOpenedFiles = recentOpenedFilesDirectory.entryList(QDir::NoDotAndDotDot | QDir::AllEntries);  // получить список всех ранее открытых файлов из директории
 }
 
 void RecentOpenedFilesWindow::CreateRecentOpenedFilesButtons()
 {
-    const int BUTTON_WIDTH = WINDOW_WIDTH - 50;
-    const int BUTTON_HEIGHT = 30;
-    for (int i = 0; i < recentOpenedFiles.size(); i++)
+    const int BUTTON_WIDTH = WINDOW_WIDTH - 50;  // длина кнопки с названием книги
+    const int BUTTON_HEIGHT = 30;  // высота кнопки с названием книги
+    for (int i = 0; i < recentOpenedFiles.size(); i++)  // цикл по всем ранее открытым книгам
     {
-        recentOpenedFilesButtons.append(new QPushButton(this));
-        recentOpenedFilesButtons[i]->setText(recentOpenedFiles[i]);
-        recentOpenedFilesButtons[i]->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-        recentOpenedFilesButtons[i]->move(0, i * BUTTON_HEIGHT);
-        connect(recentOpenedFilesButtons[i], SIGNAL(clicked()), this, SLOT(RecentOpenedFileButtonClicked()));
-        connect(recentOpenedFilesButtons[i], SIGNAL(clicked()), this, SLOT(close()));
+        recentOpenedFilesButtons.append(new QPushButton(this));  // добавление кнопки в список
+        recentOpenedFilesButtons[i]->setText(recentOpenedFiles[i]);  // текст кнопки - текст книги
+        recentOpenedFilesButtons[i]->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);  // установить размеры кнопки
+        recentOpenedFilesButtons[i]->move(0, i * BUTTON_HEIGHT);  // задать координаты кнопки
+        connect(recentOpenedFilesButtons[i], SIGNAL(clicked()), this, SLOT(RecentOpenedFileButtonClicked()));  // обработка нажатия кнопки
+        connect(recentOpenedFilesButtons[i], SIGNAL(clicked()), this, SLOT(close()));  // закрытие диалогового окна при выборе файла
     }
 }
 
 void RecentOpenedFilesWindow::CreateDeleteRecentOpenedFilesButtons()
 {
-    const int BUTTON_WIDTH = 50;
-    const int BUTTON_HEIGHT = 30;
-    for (int i = 0; i < recentOpenedFiles.size(); i++)
+    const int BUTTON_WIDTH = 50;  // длина кнопки удаления
+    const int BUTTON_HEIGHT = 30;  // высота кнопки удаления
+    for (int i = 0; i < recentOpenedFiles.size(); i++)  // цикл по всем ранее открытым книгам
     {
-        deleteRecentOpenedFilesButtons.append(new QPushButton(this));
-        deleteRecentOpenedFilesButtons[i]->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-        deleteRecentOpenedFilesButtons[i]->move(WINDOW_WIDTH - 50, i * BUTTON_HEIGHT);
+        deleteRecentOpenedFilesButtons.append(new QPushButton(this));  // добавление кнопки в список
+        deleteRecentOpenedFilesButtons[i]->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);  // установить размеры кнопки
+        deleteRecentOpenedFilesButtons[i]->move(WINDOW_WIDTH - 50, i * BUTTON_HEIGHT);  // задать координаты кнопки
 
         QIcon deleteRecentOpenedFileButtonIcon(":/img/delete_file_icon.png");
-        deleteRecentOpenedFilesButtons[i]->setIcon(deleteRecentOpenedFileButtonIcon);
+        deleteRecentOpenedFilesButtons[i]->setIcon(deleteRecentOpenedFileButtonIcon);  // задать картинку для кнопки
         deleteRecentOpenedFilesButtons[i]->setIconSize(deleteRecentOpenedFilesButtons[i]->size());
 
-        connect(deleteRecentOpenedFilesButtons[i], SIGNAL(clicked()), this, SLOT(DeleteRecentOpenedFileButtonClicked()));
+        connect(deleteRecentOpenedFilesButtons[i], SIGNAL(clicked()), this, SLOT(DeleteRecentOpenedFileButtonClicked()));  // обработка нажатия кнопки
     }
 }
 
 void RecentOpenedFilesWindow::SetLastOpenedPageNumber(QString fileName)
 {
     QFile bookFile("RecentOpenedFiles/" + fileName);
-    bookFile.open(QIODevice::Text | QIODevice::ReadOnly);
+    bookFile.open(QIODevice::Text | QIODevice::ReadOnly);  // открытие выбранного файла
     QTextStream bookFileStream(&bookFile);
-    QString bookFileText = bookFileStream.readAll();
+    QString bookFileText = bookFileStream.readAll();  // получить весь текст файла
     QString lastOpenedPage;
-    for (int i = bookFileText.length() - 1; bookFileText[i] != '\n'; i--)
+    for (int i = bookFileText.length() - 1; bookFileText[i] != '\n'; i--)  // цикл до конца последней строки файла
     {
-        lastOpenedPage.append(bookFileText[i]);
+        lastOpenedPage.append(bookFileText[i]);  // добавить символ с конца файла (в конец файла добавлялись номера страниц)
     }
 
-    std::reverse(lastOpenedPage.begin(), lastOpenedPage.end());
-    lastOpenedPageNumber = lastOpenedPage.toInt();
+    std::reverse(lastOpenedPage.begin(), lastOpenedPage.end());  // реверс строки
+    lastOpenedPageNumber = lastOpenedPage.toInt();  // перевод номера последней открытой страницы в int
 }
 
 void RecentOpenedFilesWindow::ChangeRecentOpenedFilesButtonsPosition(int i)
 {
-    QFile::remove("RecentOpenedFiles/" + recentOpenedFilesButtons[i]->text());
+    QFile::remove("RecentOpenedFiles/" + recentOpenedFilesButtons[i]->text());  // удаление выбранного файла из директории
 
-    recentOpenedFilesButtons[i]->close();
-    deleteRecentOpenedFilesButtons[i]->close();
+    recentOpenedFilesButtons[i]->close();  // закрытие кнопки с именем книги
+    deleteRecentOpenedFilesButtons[i]->close();  // закрытие соответсвующей ей кнопки удалить
 
-    if (i < recentOpenedFilesButtons.size() - 1)
+    if (i < recentOpenedFilesButtons.size() - 1)  // если выбранный файл для удаления не последний
     {
         for (int j = i + 1; j < recentOpenedFilesButtons.size(); j++)
-        {
+        {   // сместить вверх все кнопки ниже той, которая была удалена
             recentOpenedFilesButtons[j]->move(0, 30 * (j - 1));
             deleteRecentOpenedFilesButtons[j]->move(WINDOW_WIDTH - 50, 30 * (j - 1));
         }
     }
 
-    recentOpenedFiles.removeAt(i);
-    recentOpenedFilesButtons.removeAt(i);
+    recentOpenedFiles.removeAt(i);  // удалить из списка файлов удаленный файл
+    recentOpenedFilesButtons.removeAt(i);  // удалить из списка кнопок удаленную кнопку
     deleteRecentOpenedFilesButtons.removeAt(i);
 }
 

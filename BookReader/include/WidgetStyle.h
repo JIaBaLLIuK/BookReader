@@ -2,7 +2,7 @@
 #define WIDGET_STYLE_H
 
 #include <QString>
-
+// класс, содержащий в себе стили для всех виджетов
 class WidgetStyle
 {
 public:

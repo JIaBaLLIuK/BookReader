@@ -6,7 +6,7 @@
 #include "Book.h"
 
 namespace Ui { class MainWindow; }
-
+// класс для работы с главным окном
 class MainWindow : public QMainWindow
 {
     Q_OBJECT

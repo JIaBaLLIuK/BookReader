@@ -5,7 +5,7 @@
 #include <QPushButton>
 
 namespace Ui { class RecentOpenedFilesWindow; }
-
+// класс для работы с окном со списком ранее открытых файлов
 class RecentOpenedFilesWindow : public QDialog
 {
     Q_OBJECT
