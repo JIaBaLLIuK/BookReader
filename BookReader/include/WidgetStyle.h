@@ -13,9 +13,9 @@ public:
     static QString GetBookLabelStyle();
     static QString GetFindPageButtonStyle();
     static QString GetFindPageLineEditStyle();
-
     static QString GetRecentOpenedFilesButtonsStyle();
     static QString GetDeleteRecentOpenedFilesButtonsStyle();
+    static QString GetMainWindowButtonsStyle();
 };
 
 #endif

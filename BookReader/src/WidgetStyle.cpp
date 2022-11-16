@@ -72,7 +72,7 @@ QString WidgetStyle::GetRecentOpenedFilesButtonsStyle()
 {
 
     return "QPushButton {"
-                "border: 1px solid #B8B8B8;"
+                "border: 1px solid gray;"
                 "font-size: 16px;"
                 "font-family: \"Times New Roman\";"
            "}"
@@ -82,8 +82,8 @@ QString WidgetStyle::GetRecentOpenedFilesButtonsStyle()
            "}"
 
             "QPushButton::pressed {"
-                "border: 1px solid #273BE2;"
-                "background-color: #ABCDEF"
+                "border: 1px solid #005499;"
+                "background-color: #CCE4F7;"
            "}";
 }
 
@@ -91,5 +91,12 @@ QString WidgetStyle::GetDeleteRecentOpenedFilesButtonsStyle()
 {
     return "QPushButton {"
                 "border: 0px solid white;"
+           "}";
+}
+
+QString WidgetStyle::GetMainWindowButtonsStyle()
+{
+    return "QPushButton {"
+                "font-size: 12px;"
            "}";
 }

@@ -57,7 +57,7 @@ void RecentOpenedFilesWindow::SetRecentOpenedFiles()
 
 void RecentOpenedFilesWindow::CreateRecentOpenedFilesButtons()
 {
-    const int BUTTON_WIDTH = WINDOW_WIDTH - 50;  // длина кнопки с названием книги
+    const int BUTTON_WIDTH = WINDOW_WIDTH;  // длина кнопки с названием книги
     const int BUTTON_HEIGHT = 30;  // высота кнопки с названием книги
     for (int i = 0; i < recentOpenedFiles.size(); i++)  // цикл по всем ранее открытым книгам
     {

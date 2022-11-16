@@ -143,6 +143,10 @@ void MainWindow::ConfigureMainWindow()
     labelPicture = labelPicture.scaled(labelPicture.width() * 0.8f, labelPicture.height() * 0.8f);
     ui->imageLabel->setFixedSize(labelPicture.size());
     ui->imageLabel->setPixmap(labelPicture);
+    ui->toStartMenuButton->setStyleSheet(WidgetStyle::GetMainWindowButtonsStyle());
+    ui->chooseFileButton->setStyleSheet(WidgetStyle::GetMainWindowButtonsStyle());
+    ui->chooseRecentOpenedFileButton->setStyleSheet(WidgetStyle::GetMainWindowButtonsStyle());
+    ui->aboutProgramButton->setStyleSheet(WidgetStyle::GetMainWindowButtonsStyle());
 }
 
 void MainWindow::ConfigureTabWidget()
@@ -160,15 +164,17 @@ void MainWindow::ConfigureMainWindowLabel()
 void MainWindow::ConfigureAboutProgramLabel()
 {
     ui->aboutProgramLabel->setStyleSheet(WidgetStyle::GetAboutPogramLabelStyle());  // задать стили для меню с информацией
-    ui->aboutProgramLabel->setText("    Эта программа предназначена для чтения электронных книг, имеющих расширение .fb2. "  // устноавить текст информации
-                                   "Для того, чтобы начать читать, необходимо:\n"
+    ui->aboutProgramLabel->setText("    Эта программа предназначена для чтения электронных книг, имеющих расширение .fb2."  // устноавить текст информации
+                                   " Для того, чтобы начать читать, необходимо:\n"
                                    "1) нажать на кнопку \"Выбрать файл\" в левой части окна;\n"
                                    "2) в открывшемся диалоговом окне выбрать файл, имеющий расширение .fb2;\n"
                                    "3) выбрав нужный файл, нажать кнопку \"Открыть\".\n"
                                    "После открытия файла для перехода на следующую страницу необходимо нажать на кнопку \"->\" в нижней части экрана, "
                                    "для перехода на предыдущую страницу — нажать на кнопку \"<-\".\n"
-                                   "Если необходимо перейти на конкретную страницу, то необходимо в поле снизу ввести номер страницы и "
-                                   "нажать на кнопку с изображенной на ней лупой.");
+                                   "    Если необходимо перейти на конкретную страницу, то необходимо в поле снизу ввести номер страницы и "
+                                   "нажать на кнопку с изображенной на ней лупой.\n"
+                                   "    При нажатии на кнопку \"Выбрать ранее открытый файл\" можно открыть один из ранее открытых файлов на"
+                                   "последней открытой странице либо удалить этот файл.");
 }
 
 void MainWindow::ConfigureBookTab()
