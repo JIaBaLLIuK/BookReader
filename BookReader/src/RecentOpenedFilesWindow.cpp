@@ -8,8 +8,6 @@ RecentOpenedFilesWindow::RecentOpenedFilesWindow(QWidget* parent) : QDialog(pare
 {
     ui->setupUi(this);
     ConfigureDialogWindow();
-
-
     SetRecentOpenedFiles();
     CreateRecentOpenedFilesButtons();
     CreateDeleteRecentOpenedFilesButtons();
@@ -23,7 +21,7 @@ RecentOpenedFilesWindow::~RecentOpenedFilesWindow()
 void RecentOpenedFilesWindow::RecentOpenedFileButtonClicked()
 {
     QPushButton* btn = (QPushButton*)sender();
-    bookFileName = btn->text();  // получить имя выбранной книги
+    bookFileName = (btn->text()).append(".fb2");  // получить имя выбранной книги
     SetLastOpenedPageNumber(bookFileName);  // получить последнюю страницы выбранной книги
 }
 
@@ -62,7 +60,7 @@ void RecentOpenedFilesWindow::CreateRecentOpenedFilesButtons()
     for (int i = 0; i < recentOpenedFiles.size(); i++)  // цикл по всем ранее открытым книгам
     {
         recentOpenedFilesButtons.append(new QPushButton(this));  // добавление кнопки в список
-        recentOpenedFilesButtons[i]->setText(recentOpenedFiles[i]);  // текст кнопки - текст книги
+        recentOpenedFilesButtons[i]->setText(recentOpenedFiles[i].remove(recentOpenedFiles[i].size() - 4, 4));  // текст кнопки - имя файла без расширения
         recentOpenedFilesButtons[i]->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);  // установить размеры кнопки
         recentOpenedFilesButtons[i]->move(0, i * BUTTON_HEIGHT);  // задать координаты кнопки
         recentOpenedFilesButtons[i]->setStyleSheet(WidgetStyle::GetRecentOpenedFilesButtonsStyle());  // установка стилей для кнопки
@@ -110,21 +108,21 @@ void RecentOpenedFilesWindow::SetLastOpenedPageNumber(QString fileName)
 void RecentOpenedFilesWindow::ChangeRecentOpenedFilesButtonsPosition(int i)
 {
     QFile::remove("RecentOpenedFiles/" + recentOpenedFilesButtons[i]->text());  // удаление выбранного файла из директории
-
-    recentOpenedFilesButtons[i]->close();  // закрытие кнопки с именем книги
-    deleteRecentOpenedFilesButtons[i]->close();  // закрытие соответсвующей ей кнопки удалить
-
-    if (i < recentOpenedFilesButtons.size() - 1)  // если выбранный файл для удаления не последний
+    // закрытие кнопок, соответствующих выбранному файлу
+    recentOpenedFilesButtons[i]->close();
+    deleteRecentOpenedFilesButtons[i]->close();
+    // смещение кнопок, если нажатая кнопка не последняя
+    if (i < recentOpenedFilesButtons.size() - 1)
     {
         for (int j = i + 1; j < recentOpenedFilesButtons.size(); j++)
-        {   // сместить вверх все кнопки ниже той, которая была удалена
-            recentOpenedFilesButtons[j]->move(0, 30 * (j - 1));
+        {
+            recentOpenedFilesButtons[j]->move(0, 30 * (j - 1)); // сместить вверх все кнопки ниже той, которая была удалена
             deleteRecentOpenedFilesButtons[j]->move(WINDOW_WIDTH - 50, 30 * (j - 1));
         }
     }
-
-    recentOpenedFiles.removeAt(i);  // удалить из списка файлов удаленный файл
-    recentOpenedFilesButtons.removeAt(i);  // удалить из списка кнопок удаленную кнопку
+    // удаление выбранного файла и кнопок из списков
+    recentOpenedFiles.removeAt(i);
+    recentOpenedFilesButtons.removeAt(i);
     deleteRecentOpenedFilesButtons.removeAt(i);
 }
 
