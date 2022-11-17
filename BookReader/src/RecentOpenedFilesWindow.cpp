@@ -7,6 +7,7 @@
 RecentOpenedFilesWindow::RecentOpenedFilesWindow(QWidget* parent) : QDialog(parent), ui(new Ui::RecentOpenedFilesWindow)
 {
     ui->setupUi(this);
+    // book = new Book;
     ConfigureDialogWindow();
     SetRecentOpenedFiles();
     CreateRecentOpenedFilesButtons();
@@ -15,14 +16,20 @@ RecentOpenedFilesWindow::RecentOpenedFilesWindow(QWidget* parent) : QDialog(pare
 
 RecentOpenedFilesWindow::~RecentOpenedFilesWindow()
 {
+    // delete book;
     delete ui;
+}
+
+Book RecentOpenedFilesWindow::GetBook() const
+{
+    return book;
 }
 
 void RecentOpenedFilesWindow::RecentOpenedFileButtonClicked()
 {
     QPushButton* btn = (QPushButton*)sender();
-    bookFileName = (btn->text()).append(".fb2");  // получить имя выбранной книги
-    SetLastOpenedPageNumber(bookFileName);  // получить последнюю страницы выбранной книги
+    book.SetPathToBookFile("RecentOpenedFiles/" + (btn->text()).append(".fb2"));  // получить имя выбранной книги
+    SetLastOpenedPageNumber((btn->text()).append(".fb2"));  // получить последнюю страницы выбранной книги
 }
 
 void RecentOpenedFilesWindow::DeleteRecentOpenedFileButtonClicked()
@@ -102,12 +109,12 @@ void RecentOpenedFilesWindow::SetLastOpenedPageNumber(QString fileName)
     }
 
     std::reverse(lastOpenedPage.begin(), lastOpenedPage.end());  // реверс строки
-    lastOpenedPageNumber = lastOpenedPage.toInt();  // перевод номера последней открытой страницы в int
+    book.SetCurrentPageNumber(lastOpenedPage.toInt());  // перевод номера последней открытой страницы в int
 }
 
 void RecentOpenedFilesWindow::ChangeRecentOpenedFilesButtonsPosition(int i)
 {
-    QFile::remove("RecentOpenedFiles/" + recentOpenedFilesButtons[i]->text());  // удаление выбранного файла из директории
+    QFile::remove("RecentOpenedFiles/" + (recentOpenedFilesButtons[i]->text()).append(".fb2"));  // удаление выбранного файла из директории
     // закрытие кнопок, соответствующих выбранному файлу
     recentOpenedFilesButtons[i]->close();
     deleteRecentOpenedFilesButtons[i]->close();
@@ -124,14 +131,4 @@ void RecentOpenedFilesWindow::ChangeRecentOpenedFilesButtonsPosition(int i)
     recentOpenedFiles.removeAt(i);
     recentOpenedFilesButtons.removeAt(i);
     deleteRecentOpenedFilesButtons.removeAt(i);
-}
-
-int RecentOpenedFilesWindow::GetLastOpenedPageNumber() const
-{
-    return lastOpenedPageNumber;
-}
-
-QString RecentOpenedFilesWindow::GetBookFileName() const
-{
-    return bookFileName;
 }

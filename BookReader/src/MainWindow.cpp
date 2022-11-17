@@ -7,7 +7,7 @@
 #include "../include/WidgetStyle.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow), book(new Book)
+MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ConfigureMainWindow();
@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete book;
+    // delete book;
 }
 
 void MainWindow::on_aboutProgramButton_clicked()
@@ -41,57 +41,56 @@ void MainWindow::on_chooseFileButton_clicked()
     }
     else
     {
-        book->SetPathToBookFile(path);  // задать путь до книги
-        book->ResetBookText();  // обнулить текст книги
-        book->ParseBookFile();  // считать текст книги
-        book->SetCurrentPageNumber(1);  // задать номер текущей страницы
+        book.SetPathToBookFile(path);  // задать путь до книги
+        book.ResetBookText();  // обнулить текст книги
+        book.ParseBookFile();  // считать текст книги
+        book.SetCurrentPageNumber(1);  // задать номер текущей страницы
         ConfigureBookTab();  // настроить стили меню с книгой
-        SetBookLabelText(book->GetBookText(), 1);  // отобразить текст страницы на окне
-
+        SetBookLabelText(book.GetBookText(), 1);  // отобразить текст страницы на окне
         QString bookFileName = (QFileInfo(QFile(path).fileName())).fileName();
         if (!QFile::exists("RecentOpenedFiles/" + bookFileName))
         {
             QFile::copy(path, "RecentOpenedFiles/" + bookFileName);  // создать копию файла для возможности открыть его на ранее открытой странице
         }
 
-       AppendPageNumberToBookFile(book->GetCurrentPageNumber());  // добавить номер страницы в конец файла книги
+       AppendPageNumberToBookFile(book.GetCurrentPageNumber());  // добавить номер страницы в конец файла книги
     }
 }
 
 void MainWindow::on_nextPageButton_clicked()
 {
-    int currentPageNumber = book->GetCurrentPageNumber() + 1;
-    if (currentPageNumber > book->GetTotalPagesNumber())
+    int currentPageNumber = book.GetCurrentPageNumber() + 1;
+    if (currentPageNumber > book.GetTotalPagesNumber())
     {
         QMessageBox::information(this, "", "Вы дочитали до конца!");  // если последняя страница открыта
         return;
     }
 
-    book->SetCurrentPageNumber(currentPageNumber);  // задать новый номер страницы
+    book.SetCurrentPageNumber(currentPageNumber);  // задать новый номер страницы
     ui->currentPageNumberLabel->setText(QString::number(currentPageNumber));  // отобразить номер текущей страницы
-    SetBookLabelText(book->GetBookText(), currentPageNumber);  // отобразить текст новой страницы
-    AppendPageNumberToBookFile(book->GetCurrentPageNumber());  // добавить номер страницы в конец файла книги
+    SetBookLabelText(book.GetBookText(), currentPageNumber);  // отобразить текст новой страницы
+    AppendPageNumberToBookFile(book.GetCurrentPageNumber());  // добавить номер страницы в конец файла книги
 }
 
 void MainWindow::on_previousPageButton_clicked()
 {
-    int currentPageNumber = book->GetCurrentPageNumber() - 1;
+    int currentPageNumber = book.GetCurrentPageNumber() - 1;
     if (currentPageNumber == 0)
     {
         QMessageBox::information(this, "", "Вы не можете вернуться назад!");  // если первая страницы открыта
         return;
     }
 
-    book->SetCurrentPageNumber(currentPageNumber);  // задать новый номер страницы
+    book.SetCurrentPageNumber(currentPageNumber);  // задать новый номер страницы
     ui->currentPageNumberLabel->setText(QString::number(currentPageNumber));  // отобразить номер текущей страницы
-    SetBookLabelText(book->GetBookText(), currentPageNumber);  // отобразить текст новой страницы
-    AppendPageNumberToBookFile(book->GetCurrentPageNumber());  // добавить номер страницы в конец файла книги
+    SetBookLabelText(book.GetBookText(), currentPageNumber);  // отобразить текст новой страницы
+    AppendPageNumberToBookFile(book.GetCurrentPageNumber());  // добавить номер страницы в конец файла книги
 }
 
 void MainWindow::on_findPageButton_clicked()
 {
     int pageNumber = ui->findPageLineEdit->text().toInt();
-    if (pageNumber < 1 || pageNumber > book->GetTotalPagesNumber())
+    if (pageNumber < 1 || pageNumber > book.GetTotalPagesNumber())
     {
         QMessageBox::warning(this, "", "Вы ввели неверное значение!");  // если введено неверное значение для поиска
         ui->findPageLineEdit->setText("");
@@ -99,9 +98,9 @@ void MainWindow::on_findPageButton_clicked()
     }
 
     ui->findPageLineEdit->setText("");  // обнулить текст после ввода
-    book->SetCurrentPageNumber(pageNumber);  // задать новый номер страницы
+    book.SetCurrentPageNumber(pageNumber);  // задать новый номер страницы
     ui->currentPageNumberLabel->setText(QString::number(pageNumber));  // отобразить номер текущей страницы
-    SetBookLabelText(book->GetBookText(), pageNumber);  // отобразить текст новой страницы
+    SetBookLabelText(book.GetBookText(), pageNumber);  // отобразить текст новой страницы
     AppendPageNumberToBookFile(pageNumber);  // добавить номер страницы в конец файла книги
 }
 
@@ -118,20 +117,18 @@ void MainWindow::on_chooseRecentOpenedFileButton_clicked()
     RecentOpenedFilesWindow window(this);
     window.show();
     window.exec();
-    QString bookFileName = window.GetBookFileName();  // получить имя выбранного файла
-    if (bookFileName.isEmpty())
+
+    book = window.GetBook();
+    if ((book.GetPathToBookFile()).isEmpty())
     {
         QMessageBox::warning(this, "", "Вы не выбрали файл!");  // если файл не выбран
         return;
     }
 
-    book->SetPathToBookFile("RecentOpenedFiles/" + bookFileName);  // задать путь до файла
-    book->ResetBookText();  // обнулить текст книги
-    book->ParseBookFile();  // считать текст книги
-    int lastOpenedPageNumber = window.GetLastOpenedPageNumber();  // получить номер посленей открытой страницы
-    book->SetCurrentPageNumber(lastOpenedPageNumber);  // задать новый номер страницы
+    book.ResetBookText();  // обнулить текст книги
+    book.ParseBookFile();  // считать текст книги
     ConfigureBookTab();  // настроить стили меню с книгой
-    SetBookLabelText(book->GetBookText(), lastOpenedPageNumber);  // отобразить текст новой страницы
+    SetBookLabelText(book.GetBookText(), book.GetCurrentPageNumber());  // отобразить текст новой страницы
 }
 
 void MainWindow::ConfigureMainWindow()
@@ -183,9 +180,9 @@ void MainWindow::ConfigureBookTab()
     ui->bookLabel->setStyleSheet(WidgetStyle::GetBookLabelStyle());
     // задать стили для части окна с номерами текущего и обшего числа страниц
     ui->totalPagesNumberLabel->setStyleSheet(WidgetStyle::GetPageNumberLabelsStyle());
-    ui->totalPagesNumberLabel->setText(QString::number(book->GetTotalPagesNumber()));
+    ui->totalPagesNumberLabel->setText(QString::number(book.GetTotalPagesNumber()));
     ui->currentPageNumberLabel->setStyleSheet(WidgetStyle::GetPageNumberLabelsStyle());
-    ui->currentPageNumberLabel->setText(QString::number(book->GetCurrentPageNumber()));   
+    ui->currentPageNumberLabel->setText(QString::number(book.GetCurrentPageNumber()));
     ui->slashLabel->setStyleSheet("font-size: 18px;");
     // задать стили для меню поиска страницы
     QIcon findPageButtonIcon(":/img/magnifier_icon.png");
@@ -198,7 +195,7 @@ void MainWindow::ConfigureBookTab()
 void MainWindow::SetBookLabelText(QList<QString> bookText, int currentPageNumber)
 {
     QString pageText;
-    int maxStringAmount = book->GetMaxStringAmount();
+    int maxStringAmount = book.GetMaxStringAmount();
     for (int i = 0; i < maxStringAmount; i++)  // пока не будет добавлено максимальное число строк к тексту страницы
     {
         int index = (currentPageNumber - 1) * maxStringAmount + i;
@@ -215,7 +212,7 @@ void MainWindow::SetBookLabelText(QList<QString> bookText, int currentPageNumber
 
 void MainWindow::AppendPageNumberToBookFile(int pageNumber)
 {
-    QString bookFileName = (QFileInfo(QFile(book->GetPathToBookFile()).fileName())).fileName();  // получить имя файла
+    QString bookFileName = (QFileInfo(QFile(book.GetPathToBookFile()).fileName())).fileName();  // получить имя файла
     QFile bookFile("RecentOpenedFiles/" + bookFileName);
     bookFile.open(QIODevice::Text | QIODevice::Append);  // открыть файл
     QTextStream bookFileStream(&bookFile);

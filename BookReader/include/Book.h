@@ -18,6 +18,7 @@ public:
     void SetCurrentPageNumber(int);
     int GetCurrentPageNumber() const;
     int GetMaxStringAmount() const;
+    Book& operator=(const Book&);
 
 private:
     void SetBookText(QXmlStreamReader&);

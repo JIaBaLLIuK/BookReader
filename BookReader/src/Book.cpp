@@ -180,3 +180,10 @@ int Book::GetMaxStringAmount() const
 {
     return MAX_STRING_AMOUNT;
 }
+
+Book& Book::operator=(const Book& book)
+{
+    this->currentPageNumber = book.currentPageNumber;
+    this->pathToBookFile = book.pathToBookFile;
+    return *this;
+}

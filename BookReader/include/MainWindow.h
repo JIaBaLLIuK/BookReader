@@ -35,7 +35,7 @@ private:
     void AppendPageNumberToBookFile(int);
 
     Ui::MainWindow* ui;
-    Book* book;
+    Book book;
     const int WINDOW_WIDTH = 1360;
     const int WINDOW_HEIGHT = 800;
 };

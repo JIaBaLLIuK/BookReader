@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QPushButton>
 
+#include "Book.h"
+
 namespace Ui { class RecentOpenedFilesWindow; }
 // класс для работы с окном со списком ранее открытых файлов
 class RecentOpenedFilesWindow : public QDialog
@@ -13,8 +15,7 @@ class RecentOpenedFilesWindow : public QDialog
 public:
     explicit RecentOpenedFilesWindow(QWidget *parent = nullptr);
     ~RecentOpenedFilesWindow();
-    int GetLastOpenedPageNumber() const;
-    QString GetBookFileName() const;
+    Book GetBook() const;
 
 private slots:
     void RecentOpenedFileButtonClicked();
@@ -34,8 +35,7 @@ private:
     QList<QString> recentOpenedFiles;
     QList<QPushButton*> recentOpenedFilesButtons;
     QList<QPushButton*> deleteRecentOpenedFilesButtons;
-    int lastOpenedPageNumber;
-    QString bookFileName;
+    Book book;
 };
 
 #endif
