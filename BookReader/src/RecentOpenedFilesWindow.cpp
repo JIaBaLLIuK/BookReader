@@ -7,7 +7,6 @@
 RecentOpenedFilesWindow::RecentOpenedFilesWindow(QWidget* parent) : QDialog(parent), ui(new Ui::RecentOpenedFilesWindow)
 {
     ui->setupUi(this);
-    // book = new Book;
     ConfigureDialogWindow();
     SetRecentOpenedFiles();
     CreateRecentOpenedFilesButtons();
@@ -16,7 +15,6 @@ RecentOpenedFilesWindow::RecentOpenedFilesWindow(QWidget* parent) : QDialog(pare
 
 RecentOpenedFilesWindow::~RecentOpenedFilesWindow()
 {
-    // delete book;
     delete ui;
 }
 
@@ -49,7 +47,7 @@ void RecentOpenedFilesWindow::DeleteRecentOpenedFileButtonClicked()
 void RecentOpenedFilesWindow::ConfigureDialogWindow()
 {
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-    setWindowTitle("Выберите файл");
+    setWindowTitle("Ранее открытые файлы");
     setWindowIcon(QIcon(":/img/program_icon.png"));
     setWindowModality(Qt::ApplicationModal);
 }
@@ -57,6 +55,7 @@ void RecentOpenedFilesWindow::ConfigureDialogWindow()
 void RecentOpenedFilesWindow::SetRecentOpenedFiles()
 {
     QDir recentOpenedFilesDirectory("RecentOpenedFiles/");
+
     recentOpenedFiles = recentOpenedFilesDirectory.entryList(QDir::NoDotAndDotDot | QDir::AllEntries);  // получить список всех ранее открытых файлов из директории
 }
 

@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     src/Book.cpp \
+    src/Exception.cpp \
     src/MainWindow.cpp \
     src/RecentOpenedFilesWindow.cpp \
     src/WidgetStyle.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
 
 HEADERS += \
     include/Book.h \
+    include/Exception.h \
     include/MainWindow.h \
     include/RecentOpenedFilesWindow.h \
     include/WidgetStyle.h

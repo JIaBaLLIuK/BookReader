@@ -2,9 +2,15 @@
 #include <QMessageBox>
 
 #include "../include/Book.h"
+#include "../include/Exception.h"
 
 void Book::SetPathToBookFile(QString _pathToBookFile)
 {
+    if (_pathToBookFile.isEmpty())
+    {
+        throw ArgumentEmptyException("Файл не выбран!");
+    }
+
     pathToBookFile = _pathToBookFile;
 }
 
@@ -173,6 +179,11 @@ int Book::GetCurrentPageNumber() const
 
 void Book::SetCurrentPageNumber(int _currentPageNumber)
 {
+    if (_currentPageNumber > totalPagesNumber || _currentPageNumber < 1)
+    {
+        throw PageButtonException("Вы не можете открыть данную страницу!");
+    }
+
     currentPageNumber = _currentPageNumber;
 }
 
