@@ -50,10 +50,16 @@ void MainWindow::on_chooseFileButton_clicked()
     book.SetCurrentPageNumber(1);  // задать номер текущей страницы
     ConfigureBookTab();  // настроить стили меню с книгой
     SetBookLabelText(book.GetBookText(), 1);  // отобразить текст страницы на окне
-    QString bookFileName = (QFileInfo(QFile(path).fileName())).fileName();
+    QString bookFileName = (QFileInfo(QFile(path).fileName())).fileName();   
+
     if (!QFile::exists("RecentOpenedFiles/" + bookFileName))
     {
-        QFile::copy(path, "RecentOpenedFiles/" + bookFileName);  // создать копию файла для возможности открыть его на ранее открытой странице
+        if (!QDir("RecentOpenedFiles").exists())
+        {
+            QDir().mkpath("RecentOpenedFiles");  // если директория для ранее открытых файлов не создана, создать ее
+        }
+
+        QFile::copy(path, "RecentOpenedFiles/" + bookFileName);  // создать копию файла для возможности открыть его на последней открытой странице
     }
 
    AppendPageNumberToBookFile(book.GetCurrentPageNumber());  // добавить номер страницы в конец файла книги
@@ -128,10 +134,13 @@ void MainWindow::on_chooseRecentOpenedFileButton_clicked()
     window.show();
     window.exec();
 
-    book = window.GetBook();
-    if ((book.GetPathToBookFile()).isEmpty())
+    try
     {
-        QMessageBox::warning(this, "", "Вы не выбрали файл!");  // если файл не выбран
+        book = window.GetBook();  // попытка получить книгу, если она была выбрана
+    }
+    catch (const ArgumentEmptyException& exception)
+    {
+        QMessageBox::warning(this, "", exception.GetErrorMessage());
         return;
     }
 

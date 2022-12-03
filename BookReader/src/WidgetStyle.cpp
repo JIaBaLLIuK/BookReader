@@ -8,7 +8,7 @@ QString WidgetStyle::GetTabStyle()
             "}"
 
             "QTabWidget::pane {"
-               "background: #FAF0E6;"
+               "background: #FFFAF0;"
                "border: 1px solid gray;"
             "}";
 }
@@ -54,7 +54,7 @@ QString WidgetStyle::GetBookLabelStyle()
 QString WidgetStyle::GetFindPageButtonStyle()
 {
     return "QPushButton {"
-                "background: #FAEBD7;"
+                "background: #FFFAF0;"
                 "border: 0px solid white;"
            "}";
 }
@@ -62,7 +62,7 @@ QString WidgetStyle::GetFindPageButtonStyle()
 QString WidgetStyle::GetFindPageLineEditStyle()
 {
     return "QLineEdit {"
-                "background: #FAEBD7;"
+                "background: #FFFAF0;"
                 "border: 1px solid gray;"
                 "font-size: 16px;"
                 "font-family: \"Times New Roman\";"

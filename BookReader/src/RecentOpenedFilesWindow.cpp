@@ -2,6 +2,7 @@
 
 #include "../include/RecentOpenedFilesWindow.h"
 #include "../include/WidgetStyle.h"
+#include "../include/Exception.h"
 #include "ui_recentopenedfileswindow.h"
 
 RecentOpenedFilesWindow::RecentOpenedFilesWindow(QWidget* parent) : QDialog(parent), ui(new Ui::RecentOpenedFilesWindow)
@@ -20,6 +21,11 @@ RecentOpenedFilesWindow::~RecentOpenedFilesWindow()
 
 Book RecentOpenedFilesWindow::GetBook() const
 {
+    if ((book.GetPathToBookFile()).isEmpty())
+    {
+        throw ArgumentEmptyException("Файл не выбран");
+    }
+
     return book;
 }
 
@@ -27,7 +33,8 @@ void RecentOpenedFilesWindow::RecentOpenedFileButtonClicked()
 {
     QPushButton* btn = (QPushButton*)sender();
     book.SetPathToBookFile("RecentOpenedFiles/" + (btn->text()).append(".fb2"));  // получить имя выбранной книги
-    SetLastOpenedPageNumber((btn->text()).append(".fb2"));  // получить последнюю страницы выбранной книги
+    book.ParseBookFile();
+    SetLastOpenedPageNumber((btn->text()).append(".fb2"));  // задать последнюю страницы выбранной книги
 }
 
 void RecentOpenedFilesWindow::DeleteRecentOpenedFileButtonClicked()
@@ -55,7 +62,6 @@ void RecentOpenedFilesWindow::ConfigureDialogWindow()
 void RecentOpenedFilesWindow::SetRecentOpenedFiles()
 {
     QDir recentOpenedFilesDirectory("RecentOpenedFiles/");
-
     recentOpenedFiles = recentOpenedFilesDirectory.entryList(QDir::NoDotAndDotDot | QDir::AllEntries);  // получить список всех ранее открытых файлов из директории
 }
 
