@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 6.3.1
+** Created by: Qt User Interface Compiler version 6.4.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -47,12 +47,12 @@ public:
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
-            MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
+            MainWindow->setObjectName("MainWindow");
         MainWindow->resize(1360, 800);
         centralwidget = new QWidget(MainWindow);
-        centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
+        centralwidget->setObjectName("centralwidget");
         imageLabel = new QLabel(centralwidget);
-        imageLabel->setObjectName(QString::fromUtf8("imageLabel"));
+        imageLabel->setObjectName("imageLabel");
         imageLabel->setGeometry(QRect(0, 0, 375, 264));
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
@@ -61,18 +61,18 @@ public:
         imageLabel->setSizePolicy(sizePolicy);
         imageLabel->setScaledContents(false);
         toStartMenuButton = new QPushButton(centralwidget);
-        toStartMenuButton->setObjectName(QString::fromUtf8("toStartMenuButton"));
+        toStartMenuButton->setObjectName("toStartMenuButton");
         toStartMenuButton->setGeometry(QRect(100, 270, 190, 30));
         aboutProgramButton = new QPushButton(centralwidget);
-        aboutProgramButton->setObjectName(QString::fromUtf8("aboutProgramButton"));
+        aboutProgramButton->setObjectName("aboutProgramButton");
         aboutProgramButton->setGeometry(QRect(100, 390, 190, 30));
         programTab = new QTabWidget(centralwidget);
-        programTab->setObjectName(QString::fromUtf8("programTab"));
+        programTab->setObjectName("programTab");
         programTab->setGeometry(QRect(400, 0, 950, 790));
         startTab = new QWidget();
-        startTab->setObjectName(QString::fromUtf8("startTab"));
+        startTab->setObjectName("startTab");
         mainWindowLabel = new QLabel(startTab);
-        mainWindowLabel->setObjectName(QString::fromUtf8("mainWindowLabel"));
+        mainWindowLabel->setObjectName("mainWindowLabel");
         mainWindowLabel->setGeometry(QRect(0, 0, 940, 281));
         QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
@@ -82,48 +82,48 @@ public:
         mainWindowLabel->setAlignment(Qt::AlignCenter);
         programTab->addTab(startTab, QString());
         bookTab = new QWidget();
-        bookTab->setObjectName(QString::fromUtf8("bookTab"));
+        bookTab->setObjectName("bookTab");
         bookLabel = new QLabel(bookTab);
-        bookLabel->setObjectName(QString::fromUtf8("bookLabel"));
+        bookLabel->setObjectName("bookLabel");
         bookLabel->setGeometry(QRect(0, 10, 940, 727));
         bookLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         previousPageButton = new QPushButton(bookTab);
-        previousPageButton->setObjectName(QString::fromUtf8("previousPageButton"));
+        previousPageButton->setObjectName("previousPageButton");
         previousPageButton->setGeometry(QRect(5, 740, 40, 25));
         nextPageButton = new QPushButton(bookTab);
-        nextPageButton->setObjectName(QString::fromUtf8("nextPageButton"));
+        nextPageButton->setObjectName("nextPageButton");
         nextPageButton->setGeometry(QRect(905, 740, 40, 25));
         slashLabel = new QLabel(bookTab);
-        slashLabel->setObjectName(QString::fromUtf8("slashLabel"));
+        slashLabel->setObjectName("slashLabel");
         slashLabel->setGeometry(QRect(420, 730, 10, 25));
         slashLabel->setAlignment(Qt::AlignCenter);
         totalPagesNumberLabel = new QLabel(bookTab);
-        totalPagesNumberLabel->setObjectName(QString::fromUtf8("totalPagesNumberLabel"));
+        totalPagesNumberLabel->setObjectName("totalPagesNumberLabel");
         totalPagesNumberLabel->setGeometry(QRect(430, 730, 50, 25));
         totalPagesNumberLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
         currentPageNumberLabel = new QLabel(bookTab);
-        currentPageNumberLabel->setObjectName(QString::fromUtf8("currentPageNumberLabel"));
+        currentPageNumberLabel->setObjectName("currentPageNumberLabel");
         currentPageNumberLabel->setGeometry(QRect(370, 730, 50, 25));
         currentPageNumberLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         findPageButton = new QPushButton(bookTab);
-        findPageButton->setObjectName(QString::fromUtf8("findPageButton"));
+        findPageButton->setObjectName("findPageButton");
         findPageButton->setGeometry(QRect(375, 755, 25, 25));
         findPageLineEdit = new QLineEdit(bookTab);
-        findPageLineEdit->setObjectName(QString::fromUtf8("findPageLineEdit"));
+        findPageLineEdit->setObjectName("findPageLineEdit");
         findPageLineEdit->setGeometry(QRect(400, 755, 70, 20));
         programTab->addTab(bookTab, QString());
         aboutTab = new QWidget();
-        aboutTab->setObjectName(QString::fromUtf8("aboutTab"));
+        aboutTab->setObjectName("aboutTab");
         aboutProgramLabel = new QLabel(aboutTab);
-        aboutProgramLabel->setObjectName(QString::fromUtf8("aboutProgramLabel"));
+        aboutProgramLabel->setObjectName("aboutProgramLabel");
         aboutProgramLabel->setGeometry(QRect(0, 0, 940, 741));
         aboutProgramLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         programTab->addTab(aboutTab, QString());
         chooseFileButton = new QPushButton(centralwidget);
-        chooseFileButton->setObjectName(QString::fromUtf8("chooseFileButton"));
+        chooseFileButton->setObjectName("chooseFileButton");
         chooseFileButton->setGeometry(QRect(100, 310, 190, 30));
         chooseRecentOpenedFileButton = new QPushButton(centralwidget);
-        chooseRecentOpenedFileButton->setObjectName(QString::fromUtf8("chooseRecentOpenedFileButton"));
+        chooseRecentOpenedFileButton->setObjectName("chooseRecentOpenedFileButton");
         chooseRecentOpenedFileButton->setGeometry(QRect(100, 350, 190, 30));
         MainWindow->setCentralWidget(centralwidget);
 

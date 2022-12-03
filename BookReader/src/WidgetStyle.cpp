@@ -8,7 +8,7 @@ QString WidgetStyle::GetTabStyle()
             "}"
 
             "QTabWidget::pane {"
-               "background: #FAEBD7;"
+               "background: #FAF0E6;"
                "border: 1px solid gray;"
             "}";
 }
@@ -27,7 +27,8 @@ QString WidgetStyle::GetMainWindowLabelStyle()
     return "QLabel {"
                 "qproperty-wordWrap: false;"
                 "font-size: 70px;"
-                "font-family: \"Monotype Corsiva\";"
+                "font-family: \"Times New Roman\";"
+                "font-style: italic;"
                 "font-weight: 500;"
             "}";
 }
