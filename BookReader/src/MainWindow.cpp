@@ -210,14 +210,14 @@ void MainWindow::ConfigureBookTab()
     ui->findPageLineEdit->setStyleSheet(WidgetStyle::GetFindPageLineEditStyle());
 }
 
-void MainWindow::SetBookLabelText(QList<QString> bookText, int currentPageNumber)
+void MainWindow::SetBookLabelText(List<QString> bookText, int currentPageNumber)
 {
     QString pageText;
     int maxStringAmount = book.GetMaxStringAmount();
     for (int i = 0; i < maxStringAmount; i++)  // пока не будет добавлено максимальное число строк к тексту страницы
     {
         int index = (currentPageNumber - 1) * maxStringAmount + i;
-        if (index > bookText.size() - 1)  // если на последней странице строк меньше, чем из максимальное количество
+        if (index > bookText.GetSize() - 1)  // если на последней странице строк меньше, чем из максимальное количество
         {
             break;
         }

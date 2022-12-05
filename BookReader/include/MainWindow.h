@@ -31,7 +31,7 @@ private:
     void ConfigureAboutProgramLabel();
     void ConfigureBookTab();
     void ConfigurePageButtons();
-    void SetBookLabelText(QList<QString>, int);
+    void SetBookLabelText(List<QString>, int);
     void AppendPageNumberToBookFile(int);
 
     Ui::MainWindow* ui;

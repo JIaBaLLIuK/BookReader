@@ -81,17 +81,17 @@ void Book::SetBookText(QXmlStreamReader& xmlFile)
 
 void Book::SetTotalPagesNumber()
 {   // метод установки общего числа страниц книги
-    if (bookText.size() % MAX_STRING_AMOUNT == 0)
+    if (bookText.GetSize() % MAX_STRING_AMOUNT == 0)
     {
-        totalPagesNumber = bookText.size() / MAX_STRING_AMOUNT;
+        totalPagesNumber = bookText.GetSize() / MAX_STRING_AMOUNT;
     }
     else
     {
-        totalPagesNumber = bookText.size() / MAX_STRING_AMOUNT + 1;
+        totalPagesNumber = bookText.GetSize() / MAX_STRING_AMOUNT + 1;
     }
 }
 
-QList<QString> Book::GetBookText() const
+List<QString> Book::GetBookText() const
 {
     return bookText;
 }
@@ -114,7 +114,7 @@ void Book::SetTitleStyle(QXmlStreamReader& xmlFile)
             tag = xmlFile.name().toString();
         }
         // задать элементу тега "title" жирный шрифт, выравненный по центру
-        bookText.append("<p align = 'center'><b>" +
+        bookText.Append("<p align = 'center'><b>" +
                         xmlFile.readElementText(QXmlStreamReader::ReadElementTextBehaviour::IncludeChildElements) +
                         "</p></b>");
     }
@@ -124,7 +124,7 @@ void Book::SetParagraphStyle(QString paragraphText)
 {
     if (paragraphText.length() <= MAX_STRING_LENGTH)  // если абзац меньше, чем максимальная длина одной строки
     {
-        bookText.append("<p style = \"margin-left: 30; margin-right: 0; margin-top: 0; margin-bottom: 0\">" + paragraphText + "</p>");
+        bookText.Append("<p style = \"margin-left: 30; margin-right: 0; margin-top: 0; margin-bottom: 0\">" + paragraphText + "</p>");
         return;
     }
 
@@ -150,21 +150,21 @@ void Book::SetParagraphStyle(QString paragraphText)
         paragraphText = paragraphText.remove(0, length);  // удалить из текста абзаца считанную строку
         if (isFirstLineOfParagraph)
         {   // задать текст строки с отступом, если первая строка абзаца
-            bookText.append("<p style = \"margin-left: 30; margin-right: 0; margin-top: 0; margin-bottom: 0\">" + textToAppend + "</p>");
+            bookText.Append("<p style = \"margin-left: 30; margin-right: 0; margin-top: 0; margin-bottom: 0\">" + textToAppend + "</p>");
             isFirstLineOfParagraph = false;
         }
         else
         {
-            bookText.append("<p style = \"margin: 0\">" + textToAppend + "</p>");  // задать текст строки
+            bookText.Append("<p style = \"margin: 0\">" + textToAppend + "</p>");  // задать текст строки
         }
     }
 
-    bookText.append("<p style = \"margin: 0\">" + paragraphText + "</p>");  // задать текст последней строки абзаца
+    bookText.Append("<p style = \"margin: 0\">" + paragraphText + "</p>");  // задать текст последней строки абзаца
 }
 
 void Book::ResetBookText()
 {
-    bookText.clear();  // удалить текст книги
+    bookText.Clear();  // удалить текст книги
 }
 
 int Book::GetTotalPagesNumber() const

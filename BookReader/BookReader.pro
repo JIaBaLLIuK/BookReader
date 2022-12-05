@@ -19,6 +19,7 @@ SOURCES += \
 HEADERS += \
     include/Book.h \
     include/Exception.h \
+    include/List.h \
     include/MainWindow.h \
     include/RecentOpenedFilesWindow.h \
     include/WidgetStyle.h
