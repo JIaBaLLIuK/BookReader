@@ -23,7 +23,7 @@ Book RecentOpenedFilesWindow::GetBook() const
 {
     if ((book.GetPathToBookFile()).isEmpty())
     {
-        throw ArgumentEmptyException("Файл не выбран");
+        throw ArgumentNullException("Файл не выбран");
     }
 
     return book;

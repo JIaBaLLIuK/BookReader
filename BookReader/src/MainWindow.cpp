@@ -39,7 +39,7 @@ void MainWindow::on_chooseFileButton_clicked()
     {
         book.SetPathToBookFile(path);  // попытка задать путь до файла
     }
-    catch (const ArgumentEmptyException& exception)
+    catch (const ArgumentNullException& exception)
     {
         QMessageBox::warning(this, "", exception.GetErrorMessage());
         return;
@@ -72,7 +72,7 @@ void MainWindow::on_nextPageButton_clicked()
     {
         book.SetCurrentPageNumber(currentPageNumber);  // попытка задать новый номер текущей страницы
     }
-    catch (const PageButtonException& exception)
+    catch (const OutOfRangeException& exception)
     {
         QMessageBox::warning(this, "", exception.GetErrorMessage());
         return;
@@ -90,7 +90,7 @@ void MainWindow::on_previousPageButton_clicked()
     {
         book.SetCurrentPageNumber(currentPageNumber);  // попытка задать новый номер текущей страницы
     }
-    catch (const PageButtonException& exception)
+    catch (const OutOfRangeException& exception)
     {
         QMessageBox::warning(this, "", exception.GetErrorMessage());
         return;
@@ -109,7 +109,7 @@ void MainWindow::on_findPageButton_clicked()
     {
         book.SetCurrentPageNumber(pageNumber);
     }
-    catch (const PageButtonException& exception)
+    catch (const OutOfRangeException& exception)
     {
         QMessageBox::warning(this, "", exception.GetErrorMessage());
         return;
@@ -126,19 +126,18 @@ void MainWindow::on_chooseRecentOpenedFileButton_clicked()
     QDir recentOpenedFilesDirectory("RecentOpenedFiles/");
     if (recentOpenedFilesDirectory.isEmpty())
     {
-        QMessageBox::warning(this, "", "Ранее открытые файлы отсутсвуют!");  // если ранее не был открыт ни один файл
+        QMessageBox::warning(this, "", "Ранее открытые файлы отсутсвуют!");  // если ранее открытые файлы отсутсвуют
         return;
     }
 
     RecentOpenedFilesWindow window(this);
     window.show();
     window.exec();
-
     try
     {
         book = window.GetBook();  // попытка получить книгу, если она была выбрана
     }
-    catch (const ArgumentEmptyException& exception)
+    catch (const ArgumentNullException& exception)
     {
         QMessageBox::warning(this, "", exception.GetErrorMessage());
         return;

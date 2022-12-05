@@ -8,8 +8,8 @@ QString Exception::GetErrorMessage() const
     return errorMessage;
 }
 
-ArgumentEmptyException::ArgumentEmptyException(QString _errorMessage) : Exception(_errorMessage)
+ArgumentNullException::ArgumentNullException(QString _errorMessage) : Exception(_errorMessage)
 { }
 
-PageButtonException::PageButtonException(QString _errorMessage) : Exception(_errorMessage)
+OutOfRangeException::OutOfRangeException(QString _errorMessage) : Exception(_errorMessage)
 { }

@@ -14,18 +14,18 @@ private:
     QString errorMessage;
 };
 
-class ArgumentEmptyException : public Exception
+class ArgumentNullException : public Exception
 {
 public:
-    ArgumentEmptyException(QString);
-    ~ArgumentEmptyException() = default;
+    ArgumentNullException(QString);
+    ~ArgumentNullException() = default;
 };
 
-class PageButtonException : public Exception
+class OutOfRangeException : public Exception
 {
 public:
-    PageButtonException(QString);
-    ~PageButtonException() = default;
+    OutOfRangeException(QString);
+    ~OutOfRangeException() = default;
 };
 
 #endif
