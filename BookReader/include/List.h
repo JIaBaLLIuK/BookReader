@@ -24,15 +24,16 @@ public:
     void Pop();
     void Clear();
     T operator[](int);
-    int GetSize();
+    int GetSize() const;
 
 private:
     Node<T>* head;
     Node<T>* tail;
+    int size;
 };
 
 template<class T>
-List<T>::List() : head(nullptr), tail(nullptr)
+List<T>::List() : head(nullptr), tail(nullptr), size(0)
 { }
 
 template<class T>
@@ -49,6 +50,8 @@ void List<T>::Append(T data)
         tail->next = temp;
         tail = temp;
     }
+
+    size++;
 }
 
 template<class T>
@@ -60,15 +63,21 @@ void List<T>::Pop()
         head = head->next;
         delete temp;
     }
+
+    size--;
 }
 
 template<class T>
 void List<T>::Clear()
 {
-    while (head)
+    int tmpSize = size;
+    for (int i = 0; i < tmpSize; i++)
     {
         Pop();
     }
+
+    head = nullptr;
+    tail = nullptr;
 }
 
 template<class T>
@@ -84,16 +93,8 @@ T List<T>::operator[](int index)
 }
 
 template<class T>
-int List<T>::GetSize()
+int List<T>::GetSize() const
 {
-    int size = 0;
-    Node<T>* temp = head;
-    while (temp)
-    {
-        size++;
-        temp = temp->next;
-    }
-
     return size;
 }
 
