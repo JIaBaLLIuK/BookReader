@@ -137,8 +137,7 @@ void Book::SetParagraphStyle(QString paragraphText)
             textToAppend.append(paragraphText[i]);
         }
 
-        int length = textToAppend.length();
-        length--;
+        int length = textToAppend.length() - 1;
         while (textToAppend[length] != ',' && textToAppend[length] != ';' && textToAppend[length] != ':' && textToAppend[length] != '.'
                 && textToAppend[length] != '?' && textToAppend[length] != '!' && (textToAppend[length] != ' ' && paragraphText[length] != ' '))
         {   // удалять символ строки до тех пор, пока он не равен знаку препинания, пробелу или концу слова
@@ -146,8 +145,7 @@ void Book::SetParagraphStyle(QString paragraphText)
             length--;
         }
 
-        length++;
-        paragraphText = paragraphText.remove(0, length);  // удалить из текста абзаца считанную строку
+        paragraphText = paragraphText.remove(0, length + 1);  // удалить из текста абзаца считанную строку
         if (isFirstLineOfParagraph)
         {   // задать текст строки с отступом, если первая строка абзаца
             bookText.Append("<p style = \"margin-left: 30; margin-right: 0; margin-top: 0; margin-bottom: 0\">" + textToAppend + "</p>");

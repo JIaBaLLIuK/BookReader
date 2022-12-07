@@ -2,10 +2,14 @@
 #define LIST_H
 
 template<class T>
-struct Node
+class Iterator;
+
+template<class T>
+class Node
 {
+public:
     T data;
-    Node* next;
+    Node<T>* next;
     Node (T);
     ~Node() = default;
 };
@@ -25,6 +29,7 @@ public:
     void Clear();
     T operator[](int);
     int GetSize() const;
+    friend class Iterator<T>;
 
 private:
     Node<T>* head;
@@ -83,19 +88,57 @@ void List<T>::Clear()
 template<class T>
 T List<T>::operator[](int index)
 {
-    Node<T>* temp = head;
+//    Node<T>* temp = head;
+//    for (int i = 0; i < index; i++)
+//    {
+//        temp = temp->next;
+//    }
+
+//    return temp->data;
+
+    Iterator<T> iterator = head;
     for (int i = 0; i < index; i++)
     {
-        temp = temp->next;
+        ++iterator;
     }
 
-    return temp->data;
+    return *iterator;
 }
 
 template<class T>
 int List<T>::GetSize() const
 {
     return size;
+}
+
+template<class T>
+class Iterator
+{
+public:
+    Iterator(Node<T>*);
+    ~Iterator() = default;
+    Iterator<T>& operator++();
+    T& operator*() const;
+
+private:
+    Node<T>* currentNode;
+};
+
+template<class T>
+Iterator<T>::Iterator(Node<T>* node) : currentNode(node)
+{ }
+
+template<class T>
+Iterator<T> &Iterator<T>::operator++()
+{
+    currentNode = currentNode->next;
+    return *this;
+}
+
+template<class T>
+T &Iterator<T>::operator*() const
+{
+    return currentNode->data;
 }
 
 #endif // LIST_H

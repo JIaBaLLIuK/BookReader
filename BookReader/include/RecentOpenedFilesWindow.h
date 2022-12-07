@@ -13,7 +13,7 @@ class RecentOpenedFilesWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit RecentOpenedFilesWindow(QWidget *parent = nullptr);
+    RecentOpenedFilesWindow(QWidget *parent = nullptr);
     ~RecentOpenedFilesWindow();
     Book GetBook() const;
 
@@ -34,7 +34,7 @@ private:
     const int WINDOW_HEIGHT = 600;
     QList<QString> recentOpenedFiles;
     QList<QPushButton*> recentOpenedFilesButtons;
-    QList<QPushButton*> deleteRecentOpenedFilesButtons;
+    QList<QPushButton*> deleteRecentOpenedFiles;
     Book book;
 };
 

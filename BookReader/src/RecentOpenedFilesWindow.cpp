@@ -88,16 +88,16 @@ void RecentOpenedFilesWindow::CreateDeleteRecentOpenedFilesButtons()
     const int BUTTON_HEIGHT = 30;  // высота кнопки удаления
     for (int i = 0; i < recentOpenedFiles.size(); i++)  // цикл по всем ранее открытым книгам
     {
-        deleteRecentOpenedFilesButtons.append(new QPushButton(this));  // добавление кнопки в список
-        deleteRecentOpenedFilesButtons[i]->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);  // установить размеры кнопки
-        deleteRecentOpenedFilesButtons[i]->move(WINDOW_WIDTH - 50, i * BUTTON_HEIGHT);  // задать координаты кнопки
-        deleteRecentOpenedFilesButtons[i]->setStyleSheet(WidgetStyle::GetDeleteRecentOpenedFilesButtonsStyle());  // установка стилей для кнопки
+        deleteRecentOpenedFiles.append(new QPushButton(this));  // добавление кнопки в список
+        deleteRecentOpenedFiles[i]->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);  // установить размеры кнопки
+        deleteRecentOpenedFiles[i]->move(WINDOW_WIDTH - 50, i * BUTTON_HEIGHT);  // задать координаты кнопки
+        deleteRecentOpenedFiles[i]->setStyleSheet(WidgetStyle::GetDeleteRecentOpenedFilesButtonsStyle());  // установка стилей для кнопки
         // создание иконки кнопки
         QIcon deleteRecentOpenedFileButtonIcon(":/img/delete_file_icon.png");
-        deleteRecentOpenedFilesButtons[i]->setIcon(deleteRecentOpenedFileButtonIcon);
-        deleteRecentOpenedFilesButtons[i]->setIconSize(deleteRecentOpenedFilesButtons[i]->size());
+        deleteRecentOpenedFiles[i]->setIcon(deleteRecentOpenedFileButtonIcon);
+        deleteRecentOpenedFiles[i]->setIconSize(deleteRecentOpenedFiles[i]->size());
         // обработка нажатия кнопки
-        connect(deleteRecentOpenedFilesButtons[i], SIGNAL(clicked()), this, SLOT(DeleteRecentOpenedFileButtonClicked()));
+        connect(deleteRecentOpenedFiles[i], SIGNAL(clicked()), this, SLOT(DeleteRecentOpenedFileButtonClicked()));
     }
 }
 
@@ -122,18 +122,18 @@ void RecentOpenedFilesWindow::ChangeRecentOpenedFilesButtonsPosition(int i)
     QFile::remove("RecentOpenedFiles/" + (recentOpenedFilesButtons[i]->text()).append(".fb2"));  // удаление выбранного файла из директории
     // закрытие кнопок, соответствующих выбранному файлу
     recentOpenedFilesButtons[i]->close();
-    deleteRecentOpenedFilesButtons[i]->close();
+    deleteRecentOpenedFiles[i]->close();
     // смещение кнопок, если нажатая кнопка не последняя
     if (i < recentOpenedFilesButtons.size() - 1)
     {
         for (int j = i + 1; j < recentOpenedFilesButtons.size(); j++)
         {
             recentOpenedFilesButtons[j]->move(0, 30 * (j - 1)); // сместить вверх все кнопки ниже той, которая была удалена
-            deleteRecentOpenedFilesButtons[j]->move(WINDOW_WIDTH - 50, 30 * (j - 1));
+            deleteRecentOpenedFiles[j]->move(WINDOW_WIDTH - 50, 30 * (j - 1));
         }
     }
     // удаление выбранного файла и кнопок из списков
     recentOpenedFiles.removeAt(i);
     recentOpenedFilesButtons.removeAt(i);
-    deleteRecentOpenedFilesButtons.removeAt(i);
+    deleteRecentOpenedFiles.removeAt(i);
 }
