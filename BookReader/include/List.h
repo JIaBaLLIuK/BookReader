@@ -88,14 +88,6 @@ void List<T>::Clear()
 template<class T>
 T List<T>::operator[](int index)
 {
-//    Node<T>* temp = head;
-//    for (int i = 0; i < index; i++)
-//    {
-//        temp = temp->next;
-//    }
-
-//    return temp->data;
-
     Iterator<T> iterator = head;
     for (int i = 0; i < index; i++)
     {

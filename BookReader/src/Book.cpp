@@ -114,9 +114,7 @@ void Book::SetTitleStyle(QXmlStreamReader& xmlFile)
             tag = xmlFile.name().toString();
         }
         // задать элементу тега "title" жирный шрифт, выравненный по центру
-        bookText.Append("<p align = 'center'><b>" +
-                        xmlFile.readElementText(QXmlStreamReader::ReadElementTextBehaviour::IncludeChildElements) +
-                        "</p></b>");
+        bookText.Append("<p align = 'center'><b>" + xmlFile.readElementText(QXmlStreamReader::ReadElementTextBehaviour::IncludeChildElements) + "</p></b>");
     }
 }
 
